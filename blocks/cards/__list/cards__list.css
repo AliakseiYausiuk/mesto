@@ -1,0 +1,7 @@
+.cards__list {
+  list-style-type: none;
+  padding: 0;
+  display: flex;
+  justify-content: space-around;
+  padding: 25px 0 31px 0;
+}

@@ -1,0 +1,21 @@
+.pop-up_active {
+  min-width: calc(100% - 38px);
+  background-color: #fff;
+  border-radius: 10px;
+  position: fixed;
+  top: 123px;
+  left: 19px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+@media (min-width: 375px) {
+  .pop-up_active {
+    min-width: 430px;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+  }
+}

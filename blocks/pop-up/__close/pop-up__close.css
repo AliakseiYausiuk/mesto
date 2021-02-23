@@ -1,0 +1,12 @@
+.pop-up__close {
+  text-decoration: none;
+  color: #fff;
+  position: absolute;
+  top: -30px;
+  left: 260px;
+
+}
+
+.pop-up__close:hover {
+  opacity: .4;
+}
