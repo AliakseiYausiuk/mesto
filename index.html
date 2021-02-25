@@ -123,20 +123,24 @@
       &copy; 2020 Mesto Russia
     </p>
   </footer>
-  <form action="#" class="pop-up">
-    <!-- Помогите с заданием уже не сколько дней сижу и не получается сверствать макет ! У меня уже горят нервы от то что ничего не получется  -->
-    <a class="pop-up__close" href="#" target="_self">
-      <img class="pop-up__close-img" src="./images/CloseIcon.svg" alt="Крестик закрытия">
-    </a>
-    <p class="pop-up__title">
-      Редактировать профиль
-    </p>
-    <input class="pop-up__name" type="text"/>
-    <input class="pop-up__text" type="text"/>
-    <button type="submit" class="pop-up__button">
-      Сохранить
-    </button>
-  </form>
+  <div class="pop-up">
+    <div class="pop-up__container">
+       <!-- подскажите как сделать адаптивным этот крестик  -->
+      <a href="#" class="pop-up__close">
+        <img class="pop-up__close-img" src="./images/CloseIcon.svg" alt="Крестик закрытия">
+      </a>
+      <h2 class="pop-up__title">
+        Редактировать профиль
+      </h2>
+      <form class="pop-up__form" action="#">
+        <input type="text" class="pop-up__name" value="Жак-Ив Кусто"/>
+        <input type="text" class="pop-up__text" value="Исследователь океана"/>
+        <button class="pop-up__btn-save" type="submit">
+          Сохранить
+        </button>
+      </form>
+    </div>
+  </div>
   <script src="./script/main.js"></script>
 </body>
 </html>

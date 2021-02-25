@@ -1,7 +1,8 @@
 .pop-up__name {
-  max-width: calc(100% - 44px);
+  display: block;
   border: none;
-  border-bottom: 1px solid rgba(0, 0, 0, .2);
+  border-bottom: 1px solid #000;
+  margin: 75px auto 30px auto;
   padding-bottom: 13px;
 
 }

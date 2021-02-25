@@ -10,6 +10,7 @@
   background-color: #000;
   box-sizing: border-box;
   padding: 0;
+  cursor: pointer;
 }
 
 .addButton:hover {

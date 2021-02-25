@@ -1,0 +1,15 @@
+.pop-up__btn-save {
+  display: block;
+  min-width: calc(100% - 44px);
+  border: none;
+  border-radius: 2px;
+  color: #fff;
+  background-color: #000;
+  padding: 14px 0;
+  margin: 45px auto 0 auto;
+  cursor: pointer;
+}
+
+.pop-up__btn-save:hover {
+  opacity: .8;
+}

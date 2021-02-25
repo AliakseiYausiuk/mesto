@@ -1,12 +1,10 @@
 .pop-up__close {
-  text-decoration: none;
-  color: #fff;
   position: absolute;
-  top: -30px;
-  left: 260px;
-
+  top: 85px;
+  right: 19px;
+  cursor: pointer;
 }
-
 .pop-up__close:hover {
   opacity: .4;
 }
+
