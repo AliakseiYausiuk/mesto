@@ -2,3 +2,10 @@
   margin: 75px 0 0 0;
   padding-bottom: 25px;
 }
+
+@media (min-width: 768px) {
+  .pop-up__form {
+    margin: 54px 0 0 0;
+    padding-bottom: 37px;
+  }
+}

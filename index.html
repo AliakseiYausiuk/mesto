@@ -30,7 +30,7 @@
           </div>
       </div>
       <button class="profile__add-Button" type="button" aria-label="btn-add">
-        <img src="./images/plus.svg" alt="Кнопка плюс">
+        <img class="profile__add-Btn-img" src="./images/plus.svg" alt="Кнопка плюс">
       </button>
     </section>
     <section class="elements">
@@ -104,8 +104,9 @@
         Редактировать профиль
       </h2>
       <form class="pop-up__form" action="#" name="popup-form">
-        <input id='nameInput' type="text" class="pop-up__text" name="content" value=""/>
-        <input id='jobInput' type="text" class="pop-up__text" name="content" value=""/>
+        <!-- не понимаю почему текст становить не в начале inputa -->
+        <input id='nameInput' type="text" class="pop-up__text" name="content-name" value=""/>
+        <input id='jobInput' type="text" class="pop-up__text" name="content-job" value=""/>
         <button class="pop-up__btn-save" type="submit">
           Сохранить
         </button>

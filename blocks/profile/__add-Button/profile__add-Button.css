@@ -1,7 +1,4 @@
 .profile__add-Button {
-  display: flex;
-  justify-content: center;
-  align-items: center;
   min-width: 100%;
   min-height: 50px;
   border: 2px solid #fff;
@@ -11,7 +8,6 @@
   box-sizing: border-box;
   padding: 0;
   cursor: pointer;
-  outline: none;
 }
 
 .profile__add-Button:hover {
@@ -22,7 +18,6 @@
   .profile__add-Button {
     min-width: 150px;
     margin: 0 0 0 100px;
-    align-self: center;
   }
 }
 @media (min-width: 899px) {

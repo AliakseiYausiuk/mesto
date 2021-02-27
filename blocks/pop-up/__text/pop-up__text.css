@@ -1,4 +1,6 @@
 .pop-up__text {
+  min-width: calc(100% - 44px);
+  margin: 0 auto;
   display: block;
   border: none;
   border-bottom: 1px solid rgba(0, 0, 0, .2);
@@ -10,4 +12,10 @@
 
 .pop-up__text:first-child {
   margin-bottom: 30px;
+}
+
+@media (min-width: 768px) {
+  .pop-up__text {
+    min-width: calc(100% - 72px);
+  }
 }
