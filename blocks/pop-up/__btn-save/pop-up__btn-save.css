@@ -8,8 +8,18 @@
   padding: 14px 0;
   margin: 45px auto 0 auto;
   cursor: pointer;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 17px;
 }
 
 .pop-up__btn-save:hover {
   opacity: .8;
+}
+
+@media (min-width: 768px) {
+  .pop-up__btn-save {
+    font-size: 18px;
+    line-height: 22px;
+  }
 }

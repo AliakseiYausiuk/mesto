@@ -1,4 +1,4 @@
-.addButton {
+.profile__add-Button {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -11,21 +11,22 @@
   box-sizing: border-box;
   padding: 0;
   cursor: pointer;
+  outline: none;
 }
 
-.addButton:hover {
-  opacity: .4;
+.profile__add-Button:hover {
+  opacity: .6;
 }
 
 @media (min-width: 768px) {
-  .addButton {
+  .profile__add-Button {
     min-width: 150px;
     margin: 0 0 0 100px;
     align-self: center;
   }
 }
 @media (min-width: 899px) {
-  .addButton {
+  .profile__add-Button {
     margin: 0 0 0 244px;
   }
 }
