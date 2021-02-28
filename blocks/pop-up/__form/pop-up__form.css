@@ -1,6 +1,9 @@
 .pop-up__form {
   margin: 75px 0 0 0;
   padding-bottom: 25px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 @media (min-width: 768px) {

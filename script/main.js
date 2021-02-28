@@ -42,6 +42,7 @@ function formSubmitHandler (evt) {
     // Вставьте новые значения с помощью textContent
     userName.textContent = nameInput.value;
     userJob.textContent = jobInput.value;
+
     closePopUp();
 }
 
