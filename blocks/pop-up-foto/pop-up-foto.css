@@ -9,5 +9,6 @@
   opacity: 0;
   transition: visibility .5s, opacity .5s linear;
   z-index: 5;
+  padding: 90px 0 90px 0;
 }
 

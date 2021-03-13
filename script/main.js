@@ -122,9 +122,15 @@ const cardsDelete = (evt) => {
   evt.target.closest('.cards__card').remove();
 }
 
+// закрытие попапа с картинкой
+
+const closePopUpFoto = () => document.querySelector('.pop-up-foto').classList.remove('pop-up-foto_active');
+
+
 const openPopUpFotos = (evt) => {
   document.querySelector('.pop-up-foto').classList.add('pop-up-foto_active');
-  // document.querySelector('.pop-up-foto__img').src = evt.target.src
+  document.querySelector('.pop-up-foto__img').src = evt.target.src;
+  document.querySelector('.pop-up-foto__btn-close').addEventListener('click', closePopUpFoto);
 }
 
 
