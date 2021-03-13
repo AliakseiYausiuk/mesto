@@ -141,7 +141,7 @@ const addEventListeners = (item) => {
   // добавляем слушителей на удаление картинки
   item.querySelector('.cards__btn-delete').addEventListener('click', cardsDelete);
   // добавляем слушителей на попап с картинкой
-  item.querySelector('.cards__list').addEventListener('click', openPopUpFotos);
+  item.querySelector('.cards__foto').addEventListener('click', openPopUpFotos);
 }
 
 
@@ -169,6 +169,7 @@ const addEventListeners = (item) => {
     let inputValLink = popUpFormSupplement.querySelector('#linkFoto').value;
 
     let newCard = createCardsDomNode({name: inputValName,link: inputValLink});
+    addEventListeners(newCard);
 
     sectionCards.prepend(newCard);
 
