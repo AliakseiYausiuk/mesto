@@ -1,0 +1,15 @@
+.pop-up-supplement-foto__container {
+  max-width: 282px;
+  background-color: #fff;
+  margin: 123px auto 0 auto;
+  border-radius: 10px;
+  box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.15);
+  position: relative;
+}
+
+@media (min-width: 600px) {
+  .pop-up-supplement-foto__container{
+    max-width: 430px;
+    margin: 195px auto 0 auto;
+  }
+}

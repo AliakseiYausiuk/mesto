@@ -30,62 +30,7 @@
       </button>
     </section>
     <section class="elements">
-      <ul class="cards">
-        <li class="cards__card">
-          <img class="cards__foto" src="./images/foto_4.jpg" alt="Вид на горы через деревья">
-          <div class="cards__list">
-              <h2 class="cards__text">
-                Карачаево-Ч...
-              </h2>
-              <button class="cards__like" type="button" aria-label="btn-like"></button>
-          </div>
-        </li>
-        <li class="cards__card">
-          <img class="cards__foto" src="./images/foto_2.jpg" alt="Старая постройка">
-          <div class="cards__list">
-              <h2 class="cards__text">
-                Гора Эльбрус
-              </h2>
-              <button class="cards__like" type="button" aria-label="btn-like"></button>
-          </div>
-        </li>
-        <li class="cards__card">
-          <img class="cards__foto" src="./images/foto_3.jpg" alt="Закат среди гор">
-          <div class="cards__list">
-              <h2 class="cards__text">
-                Домбай
-              </h2>
-              <button class="cards__like" type="button" aria-label="btn-like"></button>
-          </div>
-        </li>
-        <li class="cards__card">
-          <img class="cards__foto" src="./images/foto_4.jpg" alt="Вид на горы через деревья">
-          <div class="cards__list">
-              <h2 class="cards__text">
-                Домбай
-              </h2>
-              <button class="cards__like" type="button" aria-label="btn-like"></button>
-          </div>
-        </li>
-        <li class="cards__card">
-          <img class="cards__foto" src="./images/foto_3.jpg" alt="Закат среди гор">
-          <div class="cards__list">
-              <h2 class="cards__text">
-                Домбай
-              </h2>
-              <button class="cards__like" type="button" aria-label="btn-like"></button>
-          </div>
-        </li>
-        <li class="cards__card">
-          <img class="cards__foto" src="./images/foto_2.jpg" alt="Старая постройка">
-          <div class="cards__list">
-              <h2 class="cards__text">
-                Домбай
-              </h2>
-              <button class="cards__like" type="button" aria-label="btn-like"></button>
-          </div>
-        </li>
-      </ul>
+      <ul class="cards"></ul>
     </section>
   </main>
   <footer class="footer">
@@ -100,7 +45,6 @@
         Редактировать профиль
       </h2>
       <form class="pop-up__form" action="#" name="popup-form">
-        <!-- не понимаю почему текст становить не в начале inputa -->
         <input id='nameInput' type="text" class="pop-up__text" name="content-name" value=""/>
         <input id='jobInput' type="text" class="pop-up__text" name="content-job" value=""/>
         <button class="pop-up__btn-save" type="submit">
@@ -109,6 +53,44 @@
       </form>
     </div>
   </div>
+  <div class="pop-up-supplement-foto">
+    <div class="pop-up-supplement-foto__container">
+      <button class="pop-up-supplement-foto__btn-close" type="button" aria-label="Close"></button>
+      <h2 class="pop-up__title">
+        Новое место
+      </h2>
+      <form class="pop-up-supplement-foto__form" action="#" name="popup-form">
+        <input id='NameFoto' type="text" class="pop-up__text" name="content-name-foto" value="" placeholder='Название'/>
+        <input id='linkFoto' type="text" class="pop-up__text" name="content-foto" value="" placeholder='Ссылка на картинку'/>
+        <button class="pop-up-supplement-foto__btn-create" type="submit">
+          Создать
+        </button>
+      </form>
+    </div>
+  </div>
+  <div class="pop-up-foto">
+    <div class="pop-up-foto__container">
+      <button class="pop-up-foto__btn-close" type="button" aria-label="Close"></button>
+      <figure class="pop-up-foto__block">
+        <img class="pop-up-foto__img" src="" alt="Вид на горы через деревья">
+        <figcaption class="pop-up-foto__text">
+          Карачаево-Ч...
+        </figcaption>
+      </figure>
+    </div>
+  </div>
+  <template id='content'>
+    <li class="cards__card">
+      <button class="cards__btn-delete" type="button" aria-label="btn-delete"></button>
+      <figure class="cards__list">
+        <img class="cards__foto" src="./images/foto_4.jpg" alt="Вид на горы через деревья">
+          <figcaption class="cards__text">
+            Карачаево-Ч...
+          </figcaption>
+          <button class="cards__like" type="button" aria-label="btn-like"></button>
+        </figure>
+    </li>
+  </template>
   <script src="./script/main.js"></script>
 </body>
 </html>

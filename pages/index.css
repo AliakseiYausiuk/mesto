@@ -36,6 +36,8 @@
 @import url('../blocks/cards/__text/cards__text.css');
 @import url('../blocks/cards/__foto/cards__foto.css');
 @import url('../blocks/cards/__list/cards__list.css');
+@import url('../blocks/cards/__like/_active/cards__like_active.css');
+@import url('../blocks/cards/__btn-delete/cards__btn-delete.css');
 
 /* footer */
 @import url('../blocks/footer/footer.css');
@@ -52,3 +54,20 @@
 @import url('../blocks/pop-up/_active/pop-up_active.css');
 
 
+/*pop-up-supplement-foto  */
+@import url('../blocks/pop-up-supplement-foto/pop-up-supplement-foto.css');
+@import url('../blocks/pop-up-supplement-foto/pop-up-supplement-foto__container/pop-up-supplement-foto__container.css');
+@import url('../blocks/pop-up-supplement-foto/_active/pop-up-supplement-foto_active.css');
+@import url('../blocks/pop-up-supplement-foto/__btn-create/pop-up-supplement-foto__btn-create.css');
+@import url('../blocks/pop-up-supplement-foto/__btn-close/pop-up-supplement-foto__btn-close.css');
+@import url('../blocks/pop-up-supplement-foto/__form/pop-up-supplement-foto__form.css');
+
+
+/* pop-up-foto */
+@import url('../blocks/pop-up-foto/__block/pop-up-foto__block.css');
+@import url('../blocks/pop-up-foto/__container/pop-up-foto__container.css');
+@import url('../blocks/pop-up-foto/__text/pop-up-foto__text.css');
+@import url('../blocks/pop-up-foto/pop-up-foto.css');
+@import url('../blocks/pop-up-foto/_active/pop-up_active.css');
+@import url('../blocks/pop-up-foto/__img/pop-up-foto__img');
+@import url('../blocks/pop-up-foto/__btn-close/pop-up-foto__btn-close.css');
