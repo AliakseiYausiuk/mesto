@@ -1,28 +1,28 @@
-let editBtn = document.querySelector('.profile__edit-button');
-let popUp = document.querySelector('.pop-up');
-let popUpSupplement = document.querySelector('.pop-up-supplement-foto');
-let popUpActive = document.querySelector('.pop-up_active');
-let popUpClose = document.querySelector('.pop-up__btn-close');
-let popUpCloseSupplement = document.querySelector('.pop-up-supplement-foto__btn-close');
-let createBtn = document.querySelector('.pop-up__btn-create');
+const editBtn = document.querySelector('.profile__edit-button');
+const popUp = document.querySelector('.pop-up');
+const popUpSupplement = document.querySelector('.pop-up-supplement-foto');
+const popUpActive = document.querySelector('.pop-up_active');
+const popUpClose = document.querySelector('.pop-up__btn-close');
+const popUpCloseSupplement = document.querySelector('.pop-up-supplement-foto__btn-close');
+const createBtn = document.querySelector('.pop-up__btn-create');
 
 // находим имя и работу user
-let userName = document.querySelector('.profile__info');
-let userJob = document.querySelector('.profile__text');
+const userName = document.querySelector('.profile__info');
+const userJob = document.querySelector('.profile__text');
 
-let editPopUp = () => {
+const editPopUp = () => {
   nameInput.value = userName.textContent;
   jobInput.value = userJob.textContent;
   openPopUp();
 }
 
-let openPopUp = () => popUp.classList.add('pop-up_active');
+const openPopUp = () => popUp.classList.add('pop-up_active');
 
-let openPopUpSupplement = () => popUpSupplement.classList.add('pop-up-supplement-foto_active');
+const openPopUpSupplement = () => popUpSupplement.classList.add('pop-up-supplement-foto_active');
 
-let closePopUp = () => popUp.classList.remove('pop-up_active');
+const closePopUp = () => popUp.classList.remove('pop-up_active');
 
-let closePopUpSupplement = () => popUpSupplement.classList.remove('pop-up-supplement-foto_active');
+const closePopUpSupplement = () => popUpSupplement.classList.remove('pop-up-supplement-foto_active');
 
 
 popUpClose.addEventListener('click', closePopUp);
@@ -31,10 +31,10 @@ editBtn.addEventListener('click', editPopUp);
 
 
 // Находим форму в DOM
-let formElement = document.querySelector('.pop-up__form');
+const formElement = document.querySelector('.pop-up__form');
 // Находим поля формы в DOM
-let nameInput = formElement.querySelector('#nameInput');
-let jobInput = formElement.querySelector('#jobInput');
+const nameInput = formElement.querySelector('#nameInput');
+const jobInput = formElement.querySelector('#jobInput');
 
 // Обработчик «отправки» формы, хотя пока
 // она никуда отправляться не будет
@@ -60,12 +60,12 @@ function formSubmitHandler (evt) {
 formElement.addEventListener('submit', formSubmitHandler);
 
 // находим кнопку добавления
-let addBtn = document.querySelector('.profile__add-Button');
+const addBtn = document.querySelector('.profile__add-Button');
 
 // находим заголовок формы и кнопку
 
-let formTitle = document.querySelector('.pop-up__title');
-let formBtnSave = document.querySelector('.pop-up__btn-save');
+const formTitle = document.querySelector('.pop-up__title');
+const formBtnSave = document.querySelector('.pop-up__btn-save');
 
 
 addBtn.addEventListener('click', openPopUpSupplement);
@@ -126,11 +126,20 @@ const cardsDelete = (evt) => {
 
 const closePopUpFoto = () => document.querySelector('.pop-up-foto').classList.remove('pop-up-foto_active');
 
+// нашли картинку которую надо передать в попап
+const popUpFoto = document.querySelector('.pop-up-foto__img');
+// кнопка закрытия попапа с картинкой
+const popUpFotoClose = document.querySelector('.pop-up-foto__btn-close').addEventListener('click', closePopUpFoto);
+
+// находим в попап текст с картинкой
+const popUpImgText = document.querySelector('.pop-up-foto__text');
+
 
 const openPopUpFotos = (evt) => {
   document.querySelector('.pop-up-foto').classList.add('pop-up-foto_active');
-  document.querySelector('.pop-up-foto__img').src = evt.target.src;
-  document.querySelector('.pop-up-foto__btn-close').addEventListener('click', closePopUpFoto);
+  popUpFoto.src = evt.target.src;
+  // popUpImgText.textContent = evt.querySelector('.cards__text').textContent;
+  console.log(evt.target.textContent);
 }
 
 
@@ -142,6 +151,7 @@ const addEventListeners = (item) => {
   item.querySelector('.cards__btn-delete').addEventListener('click', cardsDelete);
   // добавляем слушителей на попап с картинкой
   item.querySelector('.cards__foto').addEventListener('click', openPopUpFotos);
+  // item.querySelector('.cards__text').addEventListener('click', openPopUpFotos);
 }
 
 
@@ -161,14 +171,13 @@ const addEventListeners = (item) => {
   // добавление карточек
 
   let popUpFormSupplement = document.querySelector('.pop-up-supplement-foto__form');
+  const inputValName = popUpFormSupplement.querySelector('#NameFoto');
+  const inputValLink = popUpFormSupplement.querySelector('#linkFoto');
 
   const popUpFormSupplementHandler = (evt) => {
     evt.preventDefault();
 
-    let inputValName = popUpFormSupplement.querySelector('#NameFoto').value;
-    let inputValLink = popUpFormSupplement.querySelector('#linkFoto').value;
-
-    let newCard = createCardsDomNode({name: inputValName,link: inputValLink});
+    let newCard = createCardsDomNode({name: inputValName.value,link: inputValLink.value});
     addEventListeners(newCard);
 
     sectionCards.prepend(newCard);

@@ -10,5 +10,8 @@
   transition: visibility .5s, opacity .5s linear;
   z-index: 5;
   padding: 90px 0 90px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
