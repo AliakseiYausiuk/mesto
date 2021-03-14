@@ -39,7 +39,7 @@
     </p>
   </footer>
   <div class="pop-up">
-    <div class="pop-up__container">
+    <div class="pop-up__container pop-up__container_background">
       <button class="pop-up__btn-close" type="button" aria-label="Close"></button>
       <h2 class="pop-up__title">
         Редактировать профиль
@@ -53,27 +53,27 @@
       </form>
     </div>
   </div>
-  <div class="pop-up-supplement-foto">
-    <div class="pop-up-supplement-foto__container">
-      <button class="pop-up-supplement-foto__btn-close" type="button" aria-label="Close"></button>
-      <h2 class="pop-up-supplement-foto__title">
+  <div id="pop-up-supplement-foto" class="pop-up">
+    <div class="pop-up__container pop-up__container_background">
+      <button id="pop-up-supplement-foto__btn-close" class="pop-up__btn-close" type="button" aria-label="Close"></button>
+      <h2 class="pop-up__title">
         Новое место
       </h2>
-      <form class="pop-up-supplement-foto__form" action="#" name="popup-form">
-        <input id='NameFoto' type="text" class="pop-up-supplement-foto__text" name="content-name-foto" value="" placeholder='Название'/>
-        <input id='linkFoto' type="text" class="pop-up-supplement-foto__text" name="content-foto" value="" placeholder='Ссылка на картинку'/>
-        <button class="pop-up-supplement-foto__btn-create" type="submit">
+      <form id="pop-up-supplement-foto__form" class="pop-up__form" action="#" name="popup-form">
+        <input id='NameFoto' type="text" class="pop-up__text" name="content-name-foto" value="" placeholder='Название'/>
+        <input id='linkFoto' type="text" class="pop-up__text" name="content-foto" value="" placeholder='Ссылка на картинку'/>
+        <button class="pop-up__btn-save" type="submit">
           Создать
         </button>
       </form>
     </div>
   </div>
-  <div class="pop-up-foto">
-    <div class="pop-up-foto__container">
-      <button class="pop-up-foto__btn-close" type="button" aria-label="Close"></button>
-      <figure class="pop-up-foto__block">
-        <img class="pop-up-foto__img" src="./images/foto_4.jpg" alt="Вид на горы через деревья">
-        <figcaption class="pop-up-foto__text">
+  <div id="pop-up-foto" class="pop-up">
+    <div class="pop-up__container">
+      <button id="pop-up-foto__btn-close" class="pop-up__btn-close" type="button" aria-label="Close"></button>
+      <figure class="pop-up__block-figure">
+        <img class="pop-up__img" src="./images/foto_4.jpg" alt="Вид на горы через деревья">
+        <figcaption class="pop-up__text-img">
           Карачаево-Ч...
         </figcaption>
       </figure>

@@ -1,10 +1,10 @@
 const editBtn = document.querySelector('.profile__edit-button');
 const popUp = document.querySelector('.pop-up');
-const popUpSupplement = document.querySelector('.pop-up-supplement-foto');
+const popUpSupplement = document.querySelector('#pop-up-supplement-foto');
 const popUpActive = document.querySelector('.pop-up_active');
 const popUpClose = document.querySelector('.pop-up__btn-close');
-const popUpCloseSupplement = document.querySelector('.pop-up-supplement-foto__btn-close');
-const createBtn = document.querySelector('.pop-up__btn-create');
+const popUpCloseSupplement = document.querySelector('#pop-up-supplement-foto__btn-close');
+// const createBtn = document.querySelector('.pop-up__btn-create');
 
 // находим имя и работу user
 const userName = document.querySelector('.profile__info');
@@ -18,11 +18,11 @@ const editPopUp = () => {
 
 const openPopUp = () => popUp.classList.add('pop-up_active');
 
-const openPopUpSupplement = () => popUpSupplement.classList.add('pop-up-supplement-foto_active');
+const openPopUpSupplement = () => popUpSupplement.classList.add('pop-up_active');
 
 const closePopUp = () => popUp.classList.remove('pop-up_active');
 
-const closePopUpSupplement = () => popUpSupplement.classList.remove('pop-up-supplement-foto_active');
+const closePopUpSupplement = () => popUpSupplement.classList.remove('pop-up_active');
 
 
 popUpClose.addEventListener('click', closePopUp);
@@ -106,6 +106,8 @@ let contentTemplate = document.querySelector('#content').content,
     let nameCard = contentElement.querySelector('.cards__text');
     let pathImgCard = contentElement.querySelector('.cards__foto');
 
+    // не понимаю как нужно добавить функцию, чтобы повесить слушителя ?
+    //  addEventListeners(item);
     nameCard.textContent = item.name;
     pathImgCard.src = item.link;
 
@@ -124,22 +126,20 @@ const cardsDelete = (evt) => {
 
 // закрытие попапа с картинкой
 
-const closePopUpFoto = () => document.querySelector('.pop-up-foto').classList.remove('pop-up-foto_active');
+const closePopUpFoto = () => document.querySelector('#pop-up-foto').classList.remove('pop-up_active');
 
 // нашли картинку которую надо передать в попап
-const popUpFoto = document.querySelector('.pop-up-foto__img');
+const popUpFoto = document.querySelector('.pop-up__img');
 // кнопка закрытия попапа с картинкой
-const popUpFotoClose = document.querySelector('.pop-up-foto__btn-close').addEventListener('click', closePopUpFoto);
-
+const popUpFotoClose = document.querySelector('#pop-up-foto__btn-close').addEventListener('click', closePopUpFoto);
 // находим в попап текст с картинкой
-const popUpImgText = document.querySelector('.pop-up-foto__text');
+const popUpImgText = document.querySelector('.pop-up__text-img');
 
 
 const openPopUpFotos = (evt) => {
-  document.querySelector('.pop-up-foto').classList.add('pop-up-foto_active');
+  document.querySelector('#pop-up-foto').classList.add('pop-up_active');
   popUpFoto.src = evt.target.src;
-  // popUpImgText.textContent = evt.querySelector('.cards__text').textContent;
-  console.log(evt.target.textContent);
+  popUpImgText.textContent = evt.target.closest('.cards__list').querySelector('.cards__text').textContent;
 }
 
 
@@ -151,7 +151,6 @@ const addEventListeners = (item) => {
   item.querySelector('.cards__btn-delete').addEventListener('click', cardsDelete);
   // добавляем слушителей на попап с картинкой
   item.querySelector('.cards__foto').addEventListener('click', openPopUpFotos);
-  // item.querySelector('.cards__text').addEventListener('click', openPopUpFotos);
 }
 
 
@@ -170,7 +169,7 @@ const addEventListeners = (item) => {
 
   // добавление карточек
 
-  let popUpFormSupplement = document.querySelector('.pop-up-supplement-foto__form');
+  let popUpFormSupplement = document.querySelector('#pop-up-supplement-foto__form');
   const inputValName = popUpFormSupplement.querySelector('#NameFoto');
   const inputValLink = popUpFormSupplement.querySelector('#linkFoto');
 
