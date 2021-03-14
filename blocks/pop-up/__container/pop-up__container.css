@@ -5,7 +5,7 @@
   position: relative;
 }
 
-@media (min-width: 600px) {
+@media (min-width: 425px) {
   .pop-up__container {
     min-width: 430px;
   }

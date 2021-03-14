@@ -1,6 +1,6 @@
 .pop-up__img {
   object-fit: cover;
-  max-width: 816px;
+  max-width: 100%;
   max-height: 540px;
 }
 
