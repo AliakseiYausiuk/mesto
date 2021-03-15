@@ -8,5 +8,6 @@
 @media (min-width: 425px) {
   .pop-up__container {
     min-width: 430px;
+    max-height: 540px;
   }
 }

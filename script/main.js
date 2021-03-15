@@ -4,7 +4,7 @@ const popUpSupplement = document.querySelector('#pop-up-supplement-foto');
 const popUpActive = document.querySelector('.pop-up_active');
 const popUpClose = document.querySelector('.pop-up__btn-close');
 const popUpCloseSupplement = document.querySelector('#pop-up-supplement-foto__btn-close');
-// const createBtn = document.querySelector('.pop-up__btn-create');
+const openPopupFoto =  document.querySelector('#pop-up-foto');
 
 // находим имя и работу user
 const userName = document.querySelector('.profile__info');
@@ -13,20 +13,22 @@ const userJob = document.querySelector('.profile__text');
 const editPopUp = () => {
   nameInput.value = userName.textContent;
   jobInput.value = userJob.textContent;
-  openPopUp();
+  openPopUp(popUp);
 }
 
-const openPopUp = () => popUp.classList.add('pop-up_active');
+// ф-ция открытия попапа
+const openPopUp = (popup) => {
+  popup.classList.add('pop-up_active');
+}
 
-const openPopUpSupplement = () => popUpSupplement.classList.add('pop-up_active');
+// ф-ция закрытия попапа
+const closePopUp = (popupClose) => {
+  popupClose.classList.remove('pop-up_active');
+}
 
-const closePopUp = () => popUp.classList.remove('pop-up_active');
 
-const closePopUpSupplement = () => popUpSupplement.classList.remove('pop-up_active');
-
-
-popUpClose.addEventListener('click', closePopUp);
-popUpCloseSupplement.addEventListener('click', closePopUpSupplement);
+popUpClose.addEventListener('click', () => closePopUp(popUp));
+popUpCloseSupplement.addEventListener('click', () => closePopUp(popUpSupplement));
 editBtn.addEventListener('click', editPopUp);
 
 
@@ -68,11 +70,11 @@ const formTitle = document.querySelector('.pop-up__title');
 const formBtnSave = document.querySelector('.pop-up__btn-save');
 
 
-addBtn.addEventListener('click', openPopUpSupplement);
+addBtn.addEventListener('click', () => openPopUp(popUpSupplement));
 
 // данные по контенту
 // нашлёл template
-let contentTemplate = document.querySelector('#content').content,
+const contentTemplate = document.querySelector('#content').content,
   sectionCards = document.querySelector('.cards'),
   initialCards = [
     {
@@ -103,8 +105,8 @@ let contentTemplate = document.querySelector('#content').content,
 
   const createCardsDomNode = (item) => {
     const contentElement = contentTemplate.cloneNode(true);
-    let nameCard = contentElement.querySelector('.cards__text');
-    let pathImgCard = contentElement.querySelector('.cards__foto');
+    const nameCard = contentElement.querySelector('.cards__text');
+    const pathImgCard = contentElement.querySelector('.cards__foto');
 
     // не понимаю как нужно добавить функцию, чтобы повесить слушителя ?
     //  addEventListeners(item);
@@ -124,20 +126,18 @@ const cardsDelete = (evt) => {
   evt.target.closest('.cards__card').remove();
 }
 
-// закрытие попапа с картинкой
-
-const closePopUpFoto = () => document.querySelector('#pop-up-foto').classList.remove('pop-up_active');
 
 // нашли картинку которую надо передать в попап
 const popUpFoto = document.querySelector('.pop-up__img');
 // кнопка закрытия попапа с картинкой
-const popUpFotoClose = document.querySelector('#pop-up-foto__btn-close').addEventListener('click', closePopUpFoto);
+const popUpFotoClose = document.querySelector('#pop-up-foto__btn-close').addEventListener('click', () => closePopUp(openPopupFoto));
 // находим в попап текст с картинкой
 const popUpImgText = document.querySelector('.pop-up__text-img');
 
 
+
 const openPopUpFotos = (evt) => {
-  document.querySelector('#pop-up-foto').classList.add('pop-up_active');
+  openPopUp(openPopupFoto);
   popUpFoto.src = evt.target.src;
   popUpImgText.textContent = evt.target.closest('.cards__list').querySelector('.cards__text').textContent;
 }
@@ -169,7 +169,7 @@ const addEventListeners = (item) => {
 
   // добавление карточек
 
-  let popUpFormSupplement = document.querySelector('#pop-up-supplement-foto__form');
+  const popUpFormSupplement = document.querySelector('#pop-up-supplement-foto__form');
   const inputValName = popUpFormSupplement.querySelector('#NameFoto');
   const inputValLink = popUpFormSupplement.querySelector('#linkFoto');
 
