@@ -53,7 +53,7 @@ function formSubmitHandler (evt) {
     userName.textContent = nameInput.value;
     userJob.textContent = jobInput.value;
 
-    closePopUp();
+    closePopUp(popUp);
 }
 
 
@@ -91,7 +91,7 @@ const contentTemplate = document.querySelector('#content').content,
     },
     {
       name: 'Камчатка',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
+      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
     },
     {
       name: 'Холмогорский район',
@@ -99,7 +99,7 @@ const contentTemplate = document.querySelector('#content').content,
     },
     {
       name: 'Байкал',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
+      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
     }
   ];
 
@@ -183,7 +183,7 @@ const addEventListeners = (item) => {
 
     inputValName.value = '';
     inputValLink.value = '';
-    closePopUpSupplement();
+    closePopUp(popUpSupplement);
   }
 
 
