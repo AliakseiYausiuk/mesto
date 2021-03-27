@@ -1,5 +1,5 @@
 const editBtn = document.querySelector('.profile__edit-button');
-const popUp = document.querySelector('.pop-up');
+const profilePopup = document.querySelector('#profile-popup');
 const popUpSupplement = document.querySelector('#pop-up-supplement-foto');
 const popUpActive = document.querySelector('.pop-up_active');
 const popUpClose = document.querySelector('.pop-up__btn-close');
@@ -7,7 +7,7 @@ const popUpCloseSupplement = document.querySelector('#pop-up-supplement-foto__bt
 const openPopupFoto =  document.querySelector('#pop-up-foto');
 
 const allPopUp = {
-  one: popUp,
+  one: profilePopup,
   two: popUpSupplement,
   three: openPopupFoto,
 }
