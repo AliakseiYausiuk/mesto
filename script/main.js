@@ -180,7 +180,7 @@ const addEventListeners = (item) => {
   const popUpFormSupplementHandler = (evt) => {
     evt.preventDefault();
 
-    let newCard = createCardsDomNode({name: inputValName.value,link: inputValLink.value});
+    const newCard = createCardsDomNode({name: inputValName.value,link: inputValLink.value});
     addEventListeners(newCard);
 
     sectionCards.prepend(newCard);
@@ -219,14 +219,14 @@ const popUpStopPropagation = () => {
 
 // Закрытие на кнопку esc
 
-// const ClosePopUpEsc = () => {
-//   document.addEventListener('keyup', (evt) => {
-//     if (evt.key = 'esc') {
-//       closePopUp();
-//     }
-//   })
+const ClosePopUpEsc = () => {
+  document.addEventListener('keyup', (evt) => {
+    if (evt.key = 'esc') {
+      closePopUp(allPopUp.three);
+    }
+  })
 
-// }
+}
 
 
 closePopUpOverlay();
