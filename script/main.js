@@ -6,6 +6,12 @@ const popUpClose = document.querySelector('.pop-up__btn-close');
 const popUpCloseSupplement = document.querySelector('#pop-up-supplement-foto__btn-close');
 const openPopupFoto =  document.querySelector('#pop-up-foto');
 
+const allPopUp = {
+  one: popUp,
+  two: popUpSupplement,
+  three: openPopupFoto,
+}
+
 // находим имя и работу user
 const userName = document.querySelector('.profile__info');
 const userJob = document.querySelector('.profile__text');
@@ -13,7 +19,7 @@ const userJob = document.querySelector('.profile__text');
 const editPopUp = () => {
   nameInput.value = userName.textContent;
   jobInput.value = userJob.textContent;
-  openPopUp(popUp);
+  openPopUp(allPopUp.one);
 }
 
 // ф-ция открытия попапа
@@ -27,8 +33,8 @@ const closePopUp = (popupClose) => {
 }
 
 
-popUpClose.addEventListener('click', () => closePopUp(popUp));
-popUpCloseSupplement.addEventListener('click', () => closePopUp(popUpSupplement));
+popUpClose.addEventListener('click', () => closePopUp(allPopUp.one));
+popUpCloseSupplement.addEventListener('click', () => closePopUp(allPopUp.two));
 editBtn.addEventListener('click', editPopUp);
 
 
@@ -53,7 +59,7 @@ function formSubmitHandler (evt) {
     userName.textContent = nameInput.value;
     userJob.textContent = jobInput.value;
 
-    closePopUp(popUp);
+    closePopUp(allPopUp.one);
 }
 
 
@@ -70,7 +76,7 @@ const formTitle = document.querySelector('.pop-up__title');
 const formBtnSave = document.querySelector('.pop-up__btn-save');
 
 
-addBtn.addEventListener('click', () => openPopUp(popUpSupplement));
+addBtn.addEventListener('click', () => openPopUp(allPopUp.two));
 
 // данные по контенту
 // нашлёл template
@@ -108,8 +114,6 @@ const contentTemplate = document.querySelector('#content').content,
     const nameCard = contentElement.querySelector('.cards__text');
     const pathImgCard = contentElement.querySelector('.cards__foto');
 
-    // не понимаю как нужно добавить функцию, чтобы повесить слушителя ?
-    //  addEventListeners(item);
     nameCard.textContent = item.name;
     pathImgCard.src = item.link;
 
@@ -130,14 +134,14 @@ const cardsDelete = (evt) => {
 // нашли картинку которую надо передать в попап
 const popUpFoto = document.querySelector('.pop-up__img');
 // кнопка закрытия попапа с картинкой
-const popUpFotoClose = document.querySelector('#pop-up-foto__btn-close').addEventListener('click', () => closePopUp(openPopupFoto));
+const popUpFotoClose = document.querySelector('#pop-up-foto__btn-close').addEventListener('click', () => closePopUp(allPopUp.three));
 // находим в попап текст с картинкой
 const popUpImgText = document.querySelector('.pop-up__text-img');
 
 
 
 const openPopUpFotos = (evt) => {
-  openPopUp(openPopupFoto);
+  openPopUp(allPopUp.three);
   popUpFoto.src = evt.target.src;
   popUpImgText.textContent = evt.target.closest('.cards__list').querySelector('.cards__text').textContent;
 }
@@ -183,13 +187,49 @@ const addEventListeners = (item) => {
 
     inputValName.value = '';
     inputValLink.value = '';
-    closePopUp(popUpSupplement);
+    closePopUp(allPopUp.two);
   }
 
 
   popUpFormSupplement.addEventListener('submit', popUpFormSupplementHandler);
 
+  const overlay = Array.from(document.querySelectorAll('.pop-up'));
+
+// Закрытие попапа кликом на оверлей
+
+const closePopUpOverlay = () => {
+
+  overlay.forEach(popup => {
+    popup.addEventListener('click', (evt) => {
+      if (evt.target.closest('.pop-up').className = 'pop-up') {
+        popup.classList.remove(popUpActive);
+      }
+    })
+  })
+
+}
+
+const popUpStopPropagation = () => {
+  // const a = overlay.map(el => el.children)
+  const allPopUpContainer = Array.from(document.querySelectorAll('.pop-up__container'));
+
+  allPopUpContainer.forEach(el => el.addEventListener('click', (evt) => evt.stopPropagation()));
+}
 
 
+// Закрытие на кнопку esc
 
+// const ClosePopUpEsc = () => {
+//   document.addEventListener('keyup', (evt) => {
+//     if (evt.key = 'esc') {
+//       closePopUp();
+//     }
+//   })
+
+// }
+
+
+closePopUpOverlay();
+ClosePopUpEsc();
+popUpStopPropagation();
 

@@ -44,9 +44,11 @@
       <h2 class="pop-up__title">
         Редактировать профиль
       </h2>
-      <form class="pop-up__form" action="#" name="popup-form">
-        <input id='nameInput' type="text" class="pop-up__text" name="content-name" value=""/>
-        <input id='jobInput' type="text" class="pop-up__text" name="content-job" value=""/>
+      <form class="pop-up__form" action="#" name="popup-form" novalidate>
+        <input id='nameInput' type="text" class="pop-up__text" name="content-name" value="" placeholder="Ваше имя" minlength='2' maxlength="40"  required/>
+        <span id="nameInput-error" class="pop-up__span-error"></span>
+        <input id='jobInput' type="text" class="pop-up__text" name="content-job" value="" placeholder="О себе" minlength='2' maxlength="200" required/>
+        <span id="jobInput-error" class="pop-up__span-error"></span>
         <button class="pop-up__btn-save" type="submit">
           Сохранить
         </button>
@@ -59,9 +61,11 @@
       <h2 class="pop-up__title">
         Новое место
       </h2>
-      <form id="pop-up-supplement-foto__form" class="pop-up__form" action="#" name="popup-form">
-        <input id='NameFoto' type="text" class="pop-up__text" name="content-name-foto" value="" placeholder='Название'/>
-        <input id='linkFoto' type="text" class="pop-up__text" name="content-foto" value="" placeholder='Ссылка на картинку'/>
+      <form id="pop-up-supplement-foto__form" class="pop-up__form" action="#" name="popup-form" novalidate>
+        <input id='NameFoto' type="text" class="pop-up__text" name="content-name-foto" value="" placeholder='Название' minlength='2' maxlength="30" required/>
+        <span id="NameFoto-error" class="pop-up__span-error"></span>
+        <input id='linkFoto' type="url" class="pop-up__text" name="content-foto" value="" placeholder='Ссылка на картинку' required/>
+        <span id="linkFoto-error" class="pop-up__span-error"></span>
         <button class="pop-up__btn-save" type="submit">
           Создать
         </button>
@@ -91,6 +95,7 @@
         </figure>
     </li>
   </template>
+  <script src="./script/validate.js"></script>
   <script src="./script/main.js"></script>
 </body>
 </html>
