@@ -8,8 +8,8 @@
   line-height: 17px;
 }
 
-.pop-up__text:first-child {
-  margin-bottom: 30px;
+.pop-up__text:last-of-type{
+  margin-top: 30px;
 }
 
 @media (min-width: 768px) {
