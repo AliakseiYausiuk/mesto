@@ -25,6 +25,12 @@ const editPopUp = () => {
 // ф-ция открытия попапа
 const openPopUp = (popup) => {
   popup.classList.add('pop-up_active');
+  // Закрытие на кнопку esc
+  popup.addEventListener('keyup', (evt) => {
+    if (evt.key = 'esc') {
+      closePopUp(popup);
+    }
+  })
 }
 
 // ф-ция закрытия попапа
@@ -210,26 +216,13 @@ const closePopUpOverlay = () => {
 }
 
 const popUpStopPropagation = () => {
-  // const a = overlay.map(el => el.children)
   const allPopUpContainer = Array.from(document.querySelectorAll('.pop-up__container'));
-
+  const popUpIdFoto = document.querySelector('.pop-up__foto-container');
+  allPopUpContainer.push(popUpIdFoto);
   allPopUpContainer.forEach(el => el.addEventListener('click', (evt) => evt.stopPropagation()));
 }
 
 
-// Закрытие на кнопку esc
-
-const ClosePopUpEsc = () => {
-  document.addEventListener('keyup', (evt) => {
-    if (evt.key = 'esc') {
-      closePopUp(allPopUp.three);
-    }
-  })
-
-}
-
-
 closePopUpOverlay();
-ClosePopUpEsc();
 popUpStopPropagation();
 
