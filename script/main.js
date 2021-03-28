@@ -22,20 +22,25 @@ const editPopUp = () => {
   openPopUp(allPopUp.one);
 }
 
+const handleEsc = (event) => {
+  event.preventDefault();
+  if (event.key === "Escape") {
+    closePopUp(document.querySelector('.pop-up_active'));
+  }
+};
+
 // ф-ция открытия попапа
 const openPopUp = (popup) => {
   popup.classList.add('pop-up_active');
   // Закрытие на кнопку esc
-  popup.addEventListener('keyup', (evt) => {
-    if (evt.key === 'esc') {
-      closePopUp(popup);
-    }
-  })
+  document.addEventListener('keydown', handleEsc);
 }
+
 
 // ф-ция закрытия попапа
 const closePopUp = (popupClose) => {
   popupClose.classList.remove('pop-up_active');
+  popupClose.removeEventListener('keydown', handleEsc);
 }
 
 
