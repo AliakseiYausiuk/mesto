@@ -23,8 +23,8 @@ const editPopUp = () => {
 }
 
 const handleEsc = (event) => {
-  event.preventDefault();
   if (event.key === "Escape") {
+    event.preventDefault();
     closePopUp(document.querySelector('.pop-up_active'));
   }
 };
@@ -40,7 +40,7 @@ const openPopUp = (popup) => {
 // ф-ция закрытия попапа
 const closePopUp = (popupClose) => {
   popupClose.classList.remove('pop-up_active');
-  popupClose.removeEventListener('keydown', handleEsc);
+  document.removeEventListener('keydown', handleEsc);
 }
 
 
@@ -96,27 +96,33 @@ const contentTemplate = document.querySelector('#content').content,
   initialCards = [
     {
       name: 'Архыз',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
+      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg',
+      alt: 'Зелёные горы',
     },
     {
       name: 'Челябинская область',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
+      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg',
+      alt: 'Лес зимой',
     },
     {
       name: 'Иваново',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
+      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg',
+      alt: 'Высокоэтажка',
     },
     {
       name: 'Камчатка',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
+      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg',
+      alt: 'Зелёные горы',
     },
     {
       name: 'Холмогорский район',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
+      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg',
+      alt: 'Железная дорога среди леса',
     },
     {
       name: 'Байкал',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
+      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg',
+      alt: 'Высокоэтажка',
     }
   ];
 
@@ -127,6 +133,7 @@ const contentTemplate = document.querySelector('#content').content,
 
     nameCard.textContent = item.name;
     pathImgCard.src = item.link;
+    pathImgCard.alt = item.alt;
 
     return contentElement;
   }
@@ -210,7 +217,11 @@ const addEventListeners = (item) => {
 
 const closePopUpOverlay = () => {
 
-
+//  overlay.forEach(popup => {
+//    if (popup.classList.contains('.pop-up_active')) {
+//      closePopUp(popup);
+//    }
+//  })
   overlay.forEach(popup => {
     popup.addEventListener('click', (evt) => {
       if (evt.target.closest('.pop-up').className = 'pop-up') {
@@ -218,14 +229,9 @@ const closePopUpOverlay = () => {
       }
     })
   })
-  // overlay.forEach(popup => {
-  //   popup.addEventListener('click', (evt) => {
-  //     if (popup.classList.contains('.pop-up_active')) {
-  //       popup.classList.remove(popUpActive);
-  //     }
-  //   })
-  // })
 }
+
+
 
 const popUpStopPropagation = () => {
   const allPopUpContainer = Array.from(document.querySelectorAll('.pop-up__container'));
