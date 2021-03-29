@@ -33,7 +33,15 @@ const handleEsc = (event) => {
 const openPopUp = (popup) => {
   popup.classList.add('pop-up_active');
   // Закрытие на кнопку esc
+<<<<<<< HEAD
   document.addEventListener('keydown', handleEsc);
+=======
+  popup.addEventListener('keyup', (evt) => {
+    if (evt.key = 'esc') {
+      closePopUp(popup);
+    }
+  })
+>>>>>>> 4e142be35fcc48011f30eb390fa2661687b5d622
 }
 
 
