@@ -59,7 +59,6 @@ const jobInput = formElement.querySelector('#jobInput');
 // она никуда отправляться не будет
 function formSubmitHandler (evt) {
     evt.preventDefault();
-
     // Получите значение полей jobInput и nameInput из свойства value
 
 

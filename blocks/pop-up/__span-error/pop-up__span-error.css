@@ -5,12 +5,12 @@
   color: #FF0000;
   transition: opacity 0.3s;
   opacity: 0;
-  min-width: calc(100% - 44px);
+  max-width: calc(100% - 44px);
   margin-top: 5px;
 }
 
 @media (min-width: 768px) {
   .pop-up__span-error {
-    min-width: calc(100% - 72px);
+    max-width: calc(100% - 72px);
   }
 }
