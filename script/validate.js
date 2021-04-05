@@ -51,20 +51,20 @@ const checkInput = (form, inputElement, {...rest}) => {
 // Вешаем слушителей на input
 
 const setInputListeners = (formElement, {inputSelector, submitButtonSelector, ...rest}) => {
-  const inputList = Array.from(formElement.querySelectorAll(inputSelector));
+  const inputLists = Array.from(formElement.querySelectorAll(inputSelector));
 
   const buttonElement = formElement.querySelector(submitButtonSelector);
 
 
-  inputList.forEach(inputElement => {
+  inputLists.forEach(inputElement => {
     inputElement.addEventListener('input', () => {
       // проверить валидное состояние input-ов
 
       checkInput(formElement, inputElement, rest);
       // переключить состояние кнопки
-      toggleButtonState(inputList, buttonElement, rest);
+      toggleButtonState(inputLists, buttonElement, rest);
     })
-    toggleButtonState(inputList, buttonElement, rest);
+    toggleButtonState(inputLists, buttonElement, rest);
 
   })
 }
@@ -73,9 +73,9 @@ const setInputListeners = (formElement, {inputSelector, submitButtonSelector, ..
 
 // Находим формы
 const enableValidation = ({formSelector, ...rest}) => {
-  const formList = Array.from(document.querySelectorAll(formSelector));
+  const formLists = Array.from(document.querySelectorAll(formSelector));
 
-  formList.forEach(formElement => {
+  formLists.forEach(formElement => {
     formElement.addEventListener('submit', (evt) => {
       evt.preventDefault();
     });

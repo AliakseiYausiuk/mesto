@@ -210,22 +210,14 @@ const addEventListeners = (item) => {
 
   popUpFormSupplement.addEventListener('submit', popUpFormSupplementHandler);
 
-  const overlay = Array.from(document.querySelectorAll('.pop-up'));
+  const overlays = Array.from(document.querySelectorAll('.pop-up'));
 
 // Закрытие попапа кликом на оверлей
 
 const closePopUpOverlay = () => {
-
-//  overlay.forEach(popup => {
-//    if (popup.classList.contains('.pop-up_active')) {
-//      closePopUp(popup);
-//    }
-//  })
-  overlay.forEach(popup => {
+  overlays.forEach(popup => {
     popup.addEventListener('click', (evt) => {
-      if (evt.target.closest('.pop-up').className = 'pop-up') {
-        popup.classList.remove(popUpActive);
-      }
+      closePopUp(document.querySelector('.pop-up_active'));
     })
   })
 }
@@ -233,10 +225,10 @@ const closePopUpOverlay = () => {
 
 
 const popUpStopPropagation = () => {
-  const allPopUpContainer = Array.from(document.querySelectorAll('.pop-up__container'));
+  const allPopUpContainers = Array.from(document.querySelectorAll('.pop-up__container'));
   const popUpIdFoto = document.querySelector('.pop-up__foto-container');
-  allPopUpContainer.push(popUpIdFoto);
-  allPopUpContainer.forEach(el => el.addEventListener('click', (evt) => evt.stopPropagation()));
+  allPopUpContainers.push(popUpIdFoto);
+  allPopUpContainers.forEach(el => el.addEventListener('click', (evt) => evt.stopPropagation()));
 }
 
 
