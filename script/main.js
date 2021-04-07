@@ -201,9 +201,13 @@ const addEventListeners = (item) => {
     addEventListeners(newCard);
 
     sectionCards.prepend(newCard);
-
+    const formFoto = document.querySelector('#pop-up-supplement-foto');
+    const buttonElement = formFoto.querySelector('.pop-up__btn-save');
+    buttonElement.setAttribute('disabled', true);
+    buttonElement.classList.add('pop-up__btn-save_disabled');
     inputValName.value = '';
     inputValLink.value = '';
+
     closePopUp(allPopUp.two);
   }
 
