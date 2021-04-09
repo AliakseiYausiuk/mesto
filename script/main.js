@@ -201,6 +201,7 @@ const addEventListeners = (item) => {
     addEventListeners(newCard);
 
     sectionCards.prepend(newCard);
+    // Извините забыл в прошлый раз push в гид именения
     const formFoto = document.querySelector('#pop-up-supplement-foto');
     const buttonElement = formFoto.querySelector('.pop-up__btn-save');
     buttonElement.setAttribute('disabled', true);
