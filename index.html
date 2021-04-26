@@ -44,7 +44,7 @@
       <h2 class="pop-up__title">
         Редактировать профиль
       </h2>
-      <form class="pop-up__form" action="#" name="popup-form" novalidate>
+      <form id="edit-form" class="pop-up__form" action="#" name="popup-form" novalidate>
         <input id='nameInput' type="text" class="pop-up__text" name="content-name" value="" placeholder="Ваше имя" minlength='2' maxlength="40"  required/>
         <span id="nameInput-error" class="pop-up__span-error"></span>
         <input id='jobInput' type="text" class="pop-up__text" name="content-job" value="" placeholder="О себе" minlength='2' maxlength="200" required/>
@@ -95,7 +95,6 @@
         </figure>
     </li>
   </template>
-  <script src="./script/validate.js"></script>
-  <script src="./script/main.js"></script>
+  <script type="module" src="./script/index.js"></script>
 </body>
 </html>

@@ -1,3 +1,6 @@
+import {Card} from './Card.js';
+import {FormValidator} from './validate.js';
+
 const editBtn = document.querySelector('.profile__edit-button');
 const profilePopup = document.querySelector('#profile-popup');
 const popUpSupplement = document.querySelector('#pop-up-supplement-foto');
@@ -30,7 +33,7 @@ const handleEsc = (event) => {
 };
 
 // ф-ция открытия попапа
-const openPopUp = (popup) => {
+export const openPopUp = (popup) => {
   popup.classList.add('pop-up_active');
   // Закрытие на кнопку esc
   document.addEventListener('keydown', handleEsc);
@@ -80,18 +83,12 @@ formElement.addEventListener('submit', formSubmitHandler);
 // находим кнопку добавления
 const addBtn = document.querySelector('.profile__add-Button');
 
-// находим заголовок формы и кнопку
-
-const formTitle = document.querySelector('.pop-up__title');
-const formBtnSave = document.querySelector('.pop-up__btn-save');
-
 
 addBtn.addEventListener('click', () => openPopUp(allPopUp.two));
 
 // данные по контенту
 // нашлёл template
-const contentTemplate = document.querySelector('#content').content,
-  sectionCards = document.querySelector('.cards'),
+const sectionCards = document.querySelector('.cards'),
   initialCards = [
     {
       name: 'Архыз',
@@ -125,70 +122,85 @@ const contentTemplate = document.querySelector('#content').content,
     }
   ];
 
-  const createCardsDomNode = (item) => {
-    const contentElement = contentTemplate.cloneNode(true);
-    const nameCard = contentElement.querySelector('.cards__text');
-    const pathImgCard = contentElement.querySelector('.cards__foto');
 
-    nameCard.textContent = item.name;
-    pathImgCard.src = item.link;
-    pathImgCard.alt = item.alt;
 
-    return contentElement;
-  }
+const renderCards = () => {
+  initialCards.forEach(item => {
+    const card = new Card(item);
+    const cardElement = card.generateCard();
 
-// Лайки карточек
-
-const cardsLike = (evt) => {
-  evt.target.classList.toggle('cards__like_active');
-}
-
-const cardsDelete = (evt) => {
-  evt.target.closest('.cards__card').remove();
+    sectionCards.append(cardElement);
+  })
 }
 
 
-// нашли картинку которую надо передать в попап
-const popUpFoto = document.querySelector('.pop-up__img');
-// кнопка закрытия попапа с картинкой
-const popUpFotoClose = document.querySelector('#pop-up-foto__btn-close').addEventListener('click', () => closePopUp(allPopUp.three));
-// находим в попап текст с картинкой
-const popUpImgText = document.querySelector('.pop-up__text-img');
+renderCards();
+
+
+//   const createCardsDomNode = (item) => {
+//     const contentElement = contentTemplate.cloneNode(true);
+//     const nameCard = contentElement.querySelector('.cards__text');
+//     const pathImgCard = contentElement.querySelector('.cards__foto');
+
+//     nameCard.textContent = item.name;
+//     pathImgCard.src = item.link;
+//     pathImgCard.alt = item.alt;
+
+//     return contentElement;
+//   }
+
+// // Лайки карточек
+
+// const cardsLike = (evt) => {
+//   evt.target.classList.toggle('cards__like_active');
+// }
+
+// const cardsDelete = (evt) => {
+//   evt.target.closest('.cards__card').remove();
+// }
+
+
+// // нашли картинку которую надо передать в попап
+// const popUpFoto = document.querySelector('.pop-up__img');
+// // кнопка закрытия попапа с картинкой
+// const popUpFotoClose = document.querySelector('#pop-up-foto__btn-close').addEventListener('click', () => closePopUp(allPopUp.three));
+// // находим в попап текст с картинкой
+// const popUpImgText = document.querySelector('.pop-up__text-img');
 
 
 
-const openPopUpFotos = (evt) => {
-  openPopUp(allPopUp.three);
-  popUpFoto.src = evt.target.src;
-  popUpImgText.textContent = evt.target.closest('.cards__list').querySelector('.cards__text').textContent;
-}
+// const openPopUpFotos = (evt) => {
+//   openPopUp(allPopUp.three);
+//   popUpFoto.src = evt.target.src;
+//   popUpImgText.textContent = evt.target.closest('.cards__list').querySelector('.cards__text').textContent;
+// }
 
 
 
-const addEventListeners = (item) => {
-  // добавляем слушителей на лайки карточек
-  item.querySelector('.cards__like').addEventListener('click', cardsLike)
-  // добавляем слушителей на удаление картинки
-  item.querySelector('.cards__btn-delete').addEventListener('click', cardsDelete);
-  // добавляем слушителей на попап с картинкой
-  item.querySelector('.cards__foto').addEventListener('click', openPopUpFotos);
-}
+// const addEventListeners = (item) => {
+//   // добавляем слушителей на лайки карточек
+//   item.querySelector('.cards__like').addEventListener('click', cardsLike)
+//   // добавляем слушителей на удаление картинки
+//   item.querySelector('.cards__btn-delete').addEventListener('click', cardsDelete);
+//   // добавляем слушителей на попап с картинкой
+//   item.querySelector('.cards__foto').addEventListener('click', openPopUpFotos);
+// }
 
 
 
-  const renderCards = () => {
-    const result = initialCards.map(function (item) {
-      const newCards = createCardsDomNode(item);
-      addEventListeners(newCards);
-      return newCards;
-    });
+//   const renderCards = () => {
+//     const result = initialCards.map(function (item) {
+//       const newCards = createCardsDomNode(item);
+//       addEventListeners(newCards);
+//       return newCards;
+//     });
 
-    sectionCards.append(...result);
-  }
+//     sectionCards.append(...result);
+//   }
 
-  renderCards();
+//   renderCards();
 
-  // добавление карточек
+//   // добавление карточек
 
   const popUpFormSupplement = document.querySelector('#pop-up-supplement-foto__form');
   const inputValName = popUpFormSupplement.querySelector('#NameFoto');
@@ -197,13 +209,14 @@ const addEventListeners = (item) => {
   const popUpFormSupplementHandler = (evt) => {
     evt.preventDefault();
 
-    const newCard = createCardsDomNode({name: inputValName.value,link: inputValLink.value});
-    addEventListeners(newCard);
+    const newCard = new Card({name: inputValName.value, link: inputValLink.value, alt: 'img'});
+    const cardElement = newCard.generateCard();
 
-    sectionCards.prepend(newCard);
-    // Извините забыл в прошлый раз push в гид именения
+    sectionCards.prepend(cardElement);
+
     const formFoto = document.querySelector('#pop-up-supplement-foto');
     const buttonElement = formFoto.querySelector('.pop-up__btn-save');
+
     buttonElement.setAttribute('disabled', true);
     buttonElement.classList.add('pop-up__btn-save_disabled');
     inputValName.value = '';
@@ -240,3 +253,21 @@ const popUpStopPropagation = () => {
 closePopUpOverlay();
 popUpStopPropagation();
 
+
+const setting = {
+  formSelector: '.pop-up__form',
+  inputSelector: '.pop-up__text',
+  submitButtonSelector: '.pop-up__btn-save',
+  inactiveButtonClass: 'pop-up__btn-save_disabled',
+  inputErrorClass: 'pop-up__text_error',
+  errorClass: 'pop-up__span-error_active',
+}
+
+
+const editForm = document.querySelector('#edit-form');
+
+const addCardValidator = new FormValidator(setting, popUpFormSupplement);
+const editProfileValidator = new FormValidator(setting, editForm);
+
+addCardValidator.enableValidation();
+editProfileValidator.enableValidation();
