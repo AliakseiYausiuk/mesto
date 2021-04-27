@@ -41,7 +41,7 @@ export const openPopUp = (popup) => {
 
 
 // ф-ция закрытия попапа
-const closePopUp = (popupClose) => {
+export const closePopUp = (popupClose) => {
   popupClose.classList.remove('pop-up_active');
   document.removeEventListener('keydown', handleEsc);
 }

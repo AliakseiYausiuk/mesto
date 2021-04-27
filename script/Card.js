@@ -1,9 +1,8 @@
-
+import {openPopUp} from './index.js';
+import {closePopUp} from './index.js';
 
 
 const btnClosePopup = document.querySelector('#pop-up-foto__btn-close');
-const popUpSupplement = document.querySelector('#pop-up-foto');
-
 
 
 export class Card {
@@ -35,20 +34,16 @@ export class Card {
 
   _openPopUpFotos() {
    document.querySelector('.pop-up__img').src = this._link;
-   popUpSupplement.classList.add('pop-up_active');
+  //  popUpSupplement.classList.add('pop-up_active');
+   openPopUp(document.querySelector('#pop-up-foto'));
   }
 
   _closePopUpFotos() {
-    popUpSupplement.classList.remove('pop-up_active');
+    // popUpSupplement.classList.remove('pop-up_active');
+    closePopUp(document.querySelector('#pop-up-foto'));
   }
 
   _setEventListeners() {
-    this._element.querySelector('.cards__like').addEventListener('click', () => {
-
-    })
-    this._element.querySelector('.cards__btn-delete').addEventListener('click', () => {
-
-    });
     this._element.querySelector('.cards__foto').addEventListener('click', () => {
       this._openPopUpFotos();
     });
