@@ -1,9 +1,4 @@
-import {openPopUp} from './index.js';
-import {closePopUp} from './index.js';
-
-
-const btnClosePopup = document.querySelector('#pop-up-foto__btn-close');
-
+import {openPopUp, popupImg, popupImgText} from './index.js';
 
 export class Card {
   constructor(data) {
@@ -11,6 +6,7 @@ export class Card {
     this._link = data.link;
     this._alt = data.alt;
   }
+  // копируем template элемент
   _getTemplate() {
     const contentTemplate = document.querySelector('#content')
     .content
@@ -20,6 +16,7 @@ export class Card {
     return contentTemplate;
   }
   generateCard() {
+    // отрисовываем карточку
     this._element = this._getTemplate();
     this._setEventListeners();
 
@@ -33,22 +30,14 @@ export class Card {
   }
 
   _openPopUpFotos() {
-   document.querySelector('.pop-up__img').src = this._link;
-  //  popUpSupplement.classList.add('pop-up_active');
-   openPopUp(document.querySelector('#pop-up-foto'));
-  }
-
-  _closePopUpFotos() {
-    // popUpSupplement.classList.remove('pop-up_active');
-    closePopUp(document.querySelector('#pop-up-foto'));
+    popupImg.src = this._link;
+    popupImgText.textContent = this._name;
+    openPopUp(document.querySelector('#pop-up-foto'));
   }
 
   _setEventListeners() {
     this._element.querySelector('.cards__foto').addEventListener('click', () => {
       this._openPopUpFotos();
-    });
-    btnClosePopup.addEventListener('click', () => {
-      this._closePopUpFotos();
     });
     this._element.querySelector('.cards__btn-delete').addEventListener('click', () => {
       this._element.querySelector('.cards__btn-delete').closest('.cards__card').remove();
