@@ -7,7 +7,7 @@ const popUpSupplement = document.querySelector('#pop-up-supplement-foto');
 const popUpActive = document.querySelector('.pop-up_active');
 const popUpClose = document.querySelector('.pop-up__btn-close');
 const popUpCloseSupplement = document.querySelector('#pop-up-supplement-foto__btn-close');
-const openPopupFoto =  document.querySelector('#pop-up-foto');
+export const openPopupFoto =  document.querySelector('#pop-up-foto');
 export const popupImg = document.querySelector('.pop-up__img');
 export const popupImgText = document.querySelector('.pop-up__text-img');
 
@@ -86,7 +86,10 @@ formElement.addEventListener('submit', formSubmitHandler);
 const addBtn = document.querySelector('.profile__add-Button');
 
 
-addBtn.addEventListener('click', () => openPopUp(allPopUp.two));
+addBtn.addEventListener('click', () => {
+  addCardValidator.disableSubmitButton();
+  openPopUp(allPopUp.two);
+});
 
 // данные по контенту
 // нашлёл template
@@ -161,18 +164,9 @@ popUpFotoClose.addEventListener('click', () => closePopUp(allPopUp.three));
   const popUpFormSupplementHandler = (evt) => {
     evt.preventDefault();
 
-    const newCard = new Card({name: inputValName.value, link: inputValLink.value, alt: 'img'});
-    const cardElement = newCard.generateCard();
+    const cardElement = createCard({name: inputValName.value, link: inputValLink.value, alt: 'img'});
 
     sectionCards.prepend(cardElement);
-
-    const formFoto = document.querySelector('#pop-up-supplement-foto');
-    // const buttonElement = formFoto.querySelector('.pop-up__btn-save');
-
-    // buttonElement.setAttribute('disabled', true);
-    // buttonElement.classList.add('pop-up__btn-save_disabled');
-    // const addCardValidator = new FormValidator(setting, popUpFormSupplement);
-    // addCardValidator.disableSubmitButton();
 
     inputValName.value = '';
     inputValLink.value = '';
@@ -212,10 +206,8 @@ popUpStopPropagation();
 const editForm = document.querySelector('#edit-form');
 
 const addCardValidator = new FormValidator(setting, popUpFormSupplement);
-const disableButton = new FormValidator(setting, popUpFormSupplement);
 const editProfileValidator = new FormValidator(setting, editForm);
 
 
 addCardValidator.enableValidation();
-disableButton.disableSubmitButton();
 editProfileValidator.enableValidation();
