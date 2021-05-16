@@ -23,10 +23,10 @@ export default class Card {
     this._setEventListeners();
 
     this._element.querySelector('.cards__text').textContent = this._name;
-    const pathImgCard = this._element.querySelector('.cards__foto');
+    this._imageElement = this._element.querySelector('.cards__foto');
 
-    pathImgCard.src = this._link;
-    pathImgCard.alt = this._alt;
+    this._imageElement.src = this._link;
+    this._imageElement.alt = this._alt;
 
     return this._element;
   }

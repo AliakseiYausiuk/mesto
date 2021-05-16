@@ -1,12 +1,12 @@
-import '../pages/index.css';
+import './index.css';
 import Card from '../components/Card.js';
 import FormValidator from '../components/FormValidator.js';
 import Section from '../components/Section.js';
 import PopupWithImage from '../components/PopupWithImage.js';
 import PopupWithForm from '../components/PopupWithForm.js';
 import UserInfo from '../components/UserInfo.js';
-import {editBtn, profilePopup, popUpSupplement, openPopupFoto, cardSelector, editForm, addBtn, popUpFormSupplement, sectionCards, initialCards} from '../utils/constants.js';
-import {closePopUpOverlay, popUpStopPropagation} from '../utils/utils.js';
+import {editBtn, allPopUp, cardSelector, editForm, addBtn, popUpFormSupplement, sectionCards, initialCards, setting, userName, userJob, nameInput, jobInput} from '../utils/constants.js';
+
 
 const avatar = new URL('../images/avatar.jpg', import.meta.url);
 const btnDelete = new URL('../images/btnDelete.svg', import.meta.url);
@@ -14,7 +14,6 @@ const closeIcon = new URL('../images/CloseIcon.svg', import.meta.url);
 const closeIconDes = new URL('../images/CloseIconDes.svg', import.meta.url);
 const foto_2 = new URL('../images/foto_2.jpg', import.meta.url);
 const foto_3 = new URL('../images/foto_3.jpg', import.meta.url);
-const foto_4 = new URL('../images/foto_4.jpg', import.meta.url);
 const heart_active = new URL('../images/heart_active.svg', import.meta.url);
 const heart = new URL('../images/heart.svg', import.meta.url);
 const logo = new URL('../images/logo.svg', import.meta.url);
@@ -23,41 +22,28 @@ const vector = new URL('../images/Vector.svg', import.meta.url);
 
 
 
-const allPopUp = {
-  one: profilePopup,
-  two: popUpSupplement,
-  three: openPopupFoto,
-}
 
 
 
-  const setting = {
-    formSelector: '.pop-up__form',
-    inputSelector: '.pop-up__text',
-    submitButtonSelector: '.pop-up__btn-save',
-    inactiveButtonClass: 'pop-up__btn-save_disabled',
-    inputErrorClass: 'pop-up__text_error',
-    errorClass: 'pop-up__span-error_active',
-  }
 
+const popupWithImage = new PopupWithImage(allPopUp.three);
+popupWithImage.setEventListeners();
 
   const cardImageClickHandler = (link, name) => {
-    const popupWithImage = new PopupWithImage(allPopUp.three);
-    popupWithImage.setEventListeners();
     popupWithImage.open(link, name);
   }
 
 
+const cardGenerate = (item) => {
+  const card = new Card(item, cardSelector, cardImageClickHandler);
+  return card.generateCard();
+}
 
 
 
   const cardList = new Section({
     item: initialCards,
-    renderer: (item) => {
-      const card = new Card(item, cardSelector, cardImageClickHandler);
-      const cardElement = card.generateCard();
-      cardList.addItem(cardElement);
-    },
+    renderer: (item) => cardList.addItem(cardGenerate(item))
   }, sectionCards);
 
   cardList.renderItems();
@@ -89,11 +75,14 @@ const allPopUp = {
     popupAddNewCard.open();
   });
 
+  const user = new UserInfo(userName, userJob);
 
   const submitHandlerWithEditForm = (data) => {
-    const user = new UserInfo(data);
-    user.getUserInfo();
-    user.setUserInfo();
+    nameInput.value = user.getUserInfo().NameUser
+    jobInput.value = user.getUserInfo().JobUser
+    user.setUserInfo(data);
+
+
     popupEdit.close();
   }
 
@@ -103,13 +92,6 @@ const allPopUp = {
 
   const popupAddNewCard = new PopupWithForm(allPopUp.two, submitHandlerWithNewCard);
   popupAddNewCard.setEventListeners();
-
-
-
-
-
-closePopUpOverlay();
-popUpStopPropagation();
 
 
 

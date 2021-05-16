@@ -9,16 +9,16 @@
 </head>
 <body class="page">
   <header class="header">
-    <img class="logo" src="./images/logo.svg" alt="Логотип">
+    <img class="logo" src="<%=require('./images/logo.svg')%>" alt="Логотип">
   </header>
   <main class="main">
     <section class="profile">
-      <img class="profile__avatar" src="./images/avatar.jpg" alt="Аватар">
+      <img class="profile__avatar" src="<%=require('./images/avatar.jpg')%>" alt="Аватар">
       <div class="profile__list">
           <h1 class="profile__info">Жак-Ив Кусто</h1>
           <div>
             <button class="profile__edit-button" type="button" aria-label="btn-edit">
-              <img src="./images/Vector.svg" alt="Кнопка редактировать">
+              <img src="<%=require('./images/Vector.svg')%>" alt="Кнопка редактировать">
             </button>
           </div>
           <div>
@@ -26,7 +26,7 @@
           </div>
       </div>
       <button class="profile__add-Button" type="button" aria-label="btn-add">
-        <img class="profile__add-Btn-img" src="./images/plus.svg" alt="Кнопка плюс">
+        <img class="profile__add-Btn-img" src="<%=require('./images/plus.svg')%>" alt="Кнопка плюс">
       </button>
     </section>
     <section class="elements">
