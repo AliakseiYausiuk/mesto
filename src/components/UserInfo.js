@@ -7,14 +7,16 @@ export default class UserInfo {
 
   }
 
+  // выводим объект с информацией пользователя
   getUserInfo() {
     const user = {
-      NameUser: this._userName.textContent,
-      JobUser: this._userJob.textContent,
+      nameUser: this._userName.textContent,
+      jobUser: this._userJob.textContent,
     };
     return user
   }
 
+  // перезаписываем информацию о пользователе
   setUserInfo(data) {
     this._userName.textContent = data['content-name'];
     this._userJob.textContent = data['content-job'];

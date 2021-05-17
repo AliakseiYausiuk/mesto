@@ -16,9 +16,9 @@ export const userJob = document.querySelector('.profile__text');
 export const popUpFormSupplement = document.querySelector('#pop-up-supplement-foto__form');
 
 export const allPopUp = {
-  one: profilePopup,
-  two: popUpSupplement,
-  three: openPopupFoto,
+  profilePopup,
+  popUpSupplement,
+  openPopupFoto,
 }
 
 export const sectionCards = '.cards',

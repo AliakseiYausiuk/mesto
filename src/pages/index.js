@@ -26,40 +26,44 @@ const vector = new URL('../images/Vector.svg', import.meta.url);
 
 
 
-const popupWithImage = new PopupWithImage(allPopUp.three);
+const popupWithImage = new PopupWithImage(allPopUp.openPopupFoto);
 popupWithImage.setEventListeners();
+
 
   const cardImageClickHandler = (link, name) => {
     popupWithImage.open(link, name);
   }
 
-
-const cardGenerate = (item) => {
+// отрисовываем карточки
+const generateCard = (item) => {
   const card = new Card(item, cardSelector, cardImageClickHandler);
   return card.generateCard();
 }
 
 
-
+// отрисовываем все карточки приходящие из массива
   const cardList = new Section({
     item: initialCards,
-    renderer: (item) => cardList.addItem(cardGenerate(item))
+    renderer: (item) => cardList.addItem(generateCard(item))
   }, sectionCards);
 
   cardList.renderItems();
 
 
 
+  // открываем попап и выводим информацию о пользователе
   const editPopUp = () => {
+    const data = user.getUserInfo();
+    nameInput.value = data.nameUser
+    jobInput.value = data.jobUser
     popupEdit.open();
   }
 
 
 
-
+// создаём новую карточку и добавляем её сразу на страницу
   const submitHandlerWithNewCard = (data) => {
-    const card = new Card({name: data['content-name-foto'], link: data['content-foto'], alt: 'Картинка'},cardSelector, cardImageClickHandler);
-    const cardElement = card.generateCard();
+    const cardElement = generateCard({name: data['content-name-foto'], link: data['content-foto'], alt: 'Картинка'});
     cardList.addItem(cardElement);
 
     popupAddNewCard.close();
@@ -77,20 +81,18 @@ const cardGenerate = (item) => {
 
   const user = new UserInfo(userName, userJob);
 
+  // получаем данные о пользователе и меняем их на странице
   const submitHandlerWithEditForm = (data) => {
-    nameInput.value = user.getUserInfo().NameUser
-    jobInput.value = user.getUserInfo().JobUser
     user.setUserInfo(data);
-
 
     popupEdit.close();
   }
 
 
-  const popupEdit = new PopupWithForm(allPopUp.one, submitHandlerWithEditForm);
+  const popupEdit = new PopupWithForm(allPopUp.profilePopup, submitHandlerWithEditForm);
   popupEdit.setEventListeners();
 
-  const popupAddNewCard = new PopupWithForm(allPopUp.two, submitHandlerWithNewCard);
+  const popupAddNewCard = new PopupWithForm(allPopUp.popUpSupplement, submitHandlerWithNewCard);
   popupAddNewCard.setEventListeners();
 
 

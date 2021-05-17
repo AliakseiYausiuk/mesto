@@ -31,8 +31,8 @@ export default class Card {
     return this._element;
   }
 
+  // оброботчики событий
   _setEventListeners() {
-    // оброботчики событий
     this._element.querySelector('.cards__foto').addEventListener('click', () => {
       this._handleCardClick(this._link, this._name);
     });
