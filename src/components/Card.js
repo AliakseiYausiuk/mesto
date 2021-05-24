@@ -1,12 +1,15 @@
-// import {openPopUp, popupImg, popupImgText, openPopupFoto} from '../utils/constants.js';
+
 
 export default class Card {
-  constructor(item, cardSelector, handleCardClick) {
+  constructor({item, cardSelector, handleCardDelete}, handleCardClick) {
     this._name = item.name;
     this._link = item.link;
     this._alt = item.alt;
+    this._id = item._id;
+    // this._likes = item.likes;
     this._cardSelector = cardSelector;
     this._handleCardClick = handleCardClick;
+    this._handleCardDelete = handleCardDelete;
   }
   // копируем template элемент
   _getTemplate() {
@@ -31,13 +34,28 @@ export default class Card {
     return this._element;
   }
 
+  getId() {
+    return this._id
+  }
+
+  removeCard() {
+    this._element.remove();
+
+    this._element = null;
+  }
+
+  // like() {
+  //   console.log(this._likes);
+  // }
+
   // оброботчики событий
   _setEventListeners() {
     this._element.querySelector('.cards__foto').addEventListener('click', () => {
       this._handleCardClick(this._link, this._name);
     });
     this._element.querySelector('.cards__btn-delete').addEventListener('click', () => {
-      this._element.querySelector('.cards__btn-delete').closest('.cards__card').remove();
+      // this._element.querySelector('.cards__btn-delete').closest('.cards__card').remove();
+      this._handleCardDelete();
     })
     this._element.querySelector('.cards__like').addEventListener('click', () => {
       this._element.querySelector('.cards__like').classList.toggle('cards__like_active');

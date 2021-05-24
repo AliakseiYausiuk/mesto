@@ -14,11 +14,17 @@ export const jobInput = formElement.querySelector('#jobInput');
 export const userName = document.querySelector('.profile__info');
 export const userJob = document.querySelector('.profile__text');
 export const popUpFormSupplement = document.querySelector('#pop-up-supplement-foto__form');
+export const userAvatar = document.querySelector('.profile__avatar');
+export const popUpDeleteFoto = document.querySelector('#pop-up-delete-foto');
+export const popUpAvatar = document.querySelector('#pop-up-upgred-avatar');
+export const avatarFoto = document.querySelector('.profile__avatar');
 
 export const allPopUp = {
   profilePopup,
   popUpSupplement,
   openPopupFoto,
+  popUpDeleteFoto,
+  popUpAvatar,
 }
 
 export const sectionCards = '.cards',

@@ -14,6 +14,7 @@
   <main class="main">
     <section class="profile">
       <img class="profile__avatar" src="<%=require('./images/avatar.jpg')%>" alt="Аватар">
+      <!-- <div class="profile__avatar-hover"></div> -->
       <div class="profile__list">
           <h1 class="profile__info">Жак-Ив Кусто</h1>
           <div>
@@ -76,25 +77,59 @@
     <div class="pop-up__foto-container">
       <button id="pop-up-foto__btn-close" class="pop-up__btn-close" type="button" aria-label="Close"></button>
       <figure class="pop-up__block-figure">
-        <img class="pop-up__img" src="./images/foto_4.jpg" alt="Вид на горы через деревья">
+        <img class="pop-up__img" src="<%=require('./images/foto_4.jpg')%>" alt="Вид на горы через деревья">
         <figcaption class="pop-up__text-img">
           Карачаево-Ч...
         </figcaption>
       </figure>
     </div>
   </div>
+  <div id="pop-up-delete-foto" class="pop-up">
+    <div class="pop-up__container pop-up__container_background">
+      <button class="pop-up__btn-close" type="button" aria-label="Close"></button>
+      <h2 class="pop-up__title">
+        Вы уверены?
+      </h2>
+      <form id="pop-up-supplement-foto__form" class="pop-up__form" action="#" name="popup-form" novalidate>
+        <button class="pop-up__btn-save pop-up__btn-save_size" type="submit" >
+          Да
+        </button>
+      </form>
+    </div>
+  </div>
+  <div id="pop-up-upgred-avatar" class="pop-up">
+    <div class="pop-up__container pop-up__container_background">
+      <button class="pop-up__btn-close" type="button" aria-label="Close"></button>
+      <h2 class="pop-up__title">
+        Обновить аватар
+      </h2>
+      <form id="pop-up-supplement-foto__form" class="pop-up__form" action="#" name="popup-form" novalidate>
+        <input id='linkFotoAvatar' type="url" class="pop-up__text" name="contentFotoAvatar" value="" placeholder='Ссылка на картинку' required/>
+        <button class="pop-up__btn-save" type="submit" >
+          Да
+        </button>
+      </form>
+    </div>
+  </div>
   <template id='content'>
-    <li class="cards__card">
+    <li id="1234" class="cards__card">
       <button class="cards__btn-delete" type="button" aria-label="btn-delete"></button>
       <figure class="cards__list">
-        <img class="cards__foto" src="./images/foto_4.jpg" alt="Вид на горы через деревья">
+        <img class="cards__foto" src="<%=require('./images/foto_4.jpg')%>" alt="Вид на горы через деревья">
           <figcaption class="cards__text">
             Карачаево-Ч...
           </figcaption>
-          <button class="cards__like" type="button" aria-label="btn-like"></button>
+          <ul class="cards__item">
+            <li>
+              <button class="cards__like" type="button" aria-label="btn-like"></button>
+            </li>
+            <li>
+              <span class="cards__like-number"></span>
+            </li>
+          </ul>
         </figure>
     </li>
   </template>
-  <script type="module" src="./index.js"></script>
+  <!-- <script type="module" src="./index.js"></script> -->
 </body>
 </html>

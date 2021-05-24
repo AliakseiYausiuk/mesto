@@ -20,13 +20,6 @@ export default class Popup {
       this.close();
     }
   }
-  // // закрытие попапа вокруг него по пустой облости
-  // _closePopUpOverlay() {
-  //   this._popup.addEventListener('click', () => this.close());
-  // }
-  // _popUpStopPropagation() {
-  //   this._popup.addEventListener('click', (evt) => evt.stopPropagation());
-  // }
   setEventListeners() {
     this._popup.querySelector('.pop-up__btn-close').addEventListener('click', () => this.close());
     this._popup.addEventListener('click', (evt) => {
