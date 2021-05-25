@@ -1,12 +1,13 @@
 
 
 export default class Card {
-  constructor({item, cardSelector, handleCardDelete}, handleCardClick) {
+  constructor({item}, cardSelector, handleCardDelete, handleCardClick) {
     this._name = item.name;
     this._link = item.link;
-    this._alt = item.alt;
+    this._likes = item.likes;
+    // this._likeFoto = likeFoto;
+    // this._alt = item.alt;
     this._id = item._id;
-    // this._likes = item.likes;
     this._cardSelector = cardSelector;
     this._handleCardClick = handleCardClick;
     this._handleCardDelete = handleCardDelete;
@@ -29,7 +30,10 @@ export default class Card {
     this._imageElement = this._element.querySelector('.cards__foto');
 
     this._imageElement.src = this._link;
-    this._imageElement.alt = this._alt;
+    this._imageElement.alt = 'фото карточки'
+
+
+    this._element.querySelector('.cards__like-number').textContent = this._likes.length
 
     return this._element;
   }

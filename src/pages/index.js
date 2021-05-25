@@ -42,19 +42,18 @@ popupWithImage.setEventListeners();
     popupWithImage.open(link, name);
   }
 
+  const handleCardDelete = () => {
+    popupCardDelete.open();
+    api.deleteCard(card.getId())
+    .then(() => card.removeCard())
+    .catch(err => Promise.reject(`Ошибка ${err.status}`));
+  }
 
 
-// отрисовываем карточки
+
+// создаём карточки
 const generateCard = (item) => {
-  const card = new Card({
-    item,
-    cardSelector,
-    handleCardDelete:() => {
-      popupCardDelete.open();
-      api.deleteCard(card.getId())
-      .then(() => card.removeCard())
-      .catch(err => Promise.reject(`Ошибка ${err.status}`));
-    }}, cardImageClickHandler);
+  const card = new Card({item},cardSelector, handleCardDelete, cardImageClickHandler);
   return card.generateCard();
 }
 
@@ -67,7 +66,8 @@ const generateCard = (item) => {
 
   // cardList.renderItems();
 
-api.getInitialCards()
+
+  api.getInitialCards()
 .then(res => {
   const cardList = new Section({
     item: res,
@@ -77,6 +77,7 @@ api.getInitialCards()
   cardList.renderItems();
 })
 .catch(err => Promise.reject(`Ошибка ${err.status}`))
+
 
 
   // открываем попап и выводим информацию о пользователе
@@ -93,8 +94,10 @@ api.getInitialCards()
   const submitHandlerWithNewCard = (data) => {
     // const cardElement = generateCard({name: data['content-name-foto'], link: data['content-foto'], alt: 'Картинка'});
     // cardList.addItem(cardElement);
-    api.newCard(data);
 
+    api.newCard(data)
+    .then(res => generateCard(res))
+    .catch(err => Promise.reject(`Ошибка ${err.status}`))
 
     popupAddNewCard.close();
   }
@@ -121,8 +124,11 @@ api.getInitialCards()
 
   // получаем данные о пользователе и меняем их на странице
   const submitHandlerWithEditForm = (data) => {
-    // user.setUserInfo(data);
-    api.userEdit(data);
+    api.userEdit(data)
+    .then(res => {
+      user.setUserInfo(res);
+    })
+    .catch(err => Promise.reject(`Ошибка ${err.status}`))
 
     popupEdit.close();
   }
