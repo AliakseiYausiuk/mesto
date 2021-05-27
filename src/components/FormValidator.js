@@ -40,12 +40,14 @@ export class FormValidator {
     return inputList.some(inputElement => !inputElement.validity.valid);
   }
 
-  _toggleButtonState(inputList, buttonElement) {
+  _toggleButtonState(inputList) {
       if (this._hasInvalidInput(inputList) || this._allInputsEmpty(inputList)) {
         this.disableSubmitButton();
       } else {
         this._buttonElement.classList.remove(this._data.inactiveButtonClass);
         this._buttonElement.removeAttribute('disabled');
+        // console.log(this._data.submitButtonSelector);
+        this._buttonElement.textContent = 'Сохранение...';
       }
   }
 
@@ -56,7 +58,7 @@ export class FormValidator {
       inputElement.addEventListener('input', () => {
         this._checkInput(inputElement);
 
-        this._toggleButtonState(this._inputLists, this._buttonElement);
+        this._toggleButtonState(this._inputLists);
       })
     })
 

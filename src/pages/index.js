@@ -5,7 +5,7 @@ import Section from '../components/Section.js';
 import PopupWithImage from '../components/PopupWithImage.js';
 import PopupWithForm from '../components/PopupWithForm.js';
 import UserInfo from '../components/UserInfo.js';
-import {editBtn, allPopUp, cardSelector, editForm, addBtn, popUpFormSupplement, avatarFoto, sectionCards, initialCards, userAvatar, setting, userName, userJob, nameInput, jobInput} from '../utils/constants.js';
+import {editBtn, allPopUp, cardSelector, editForm, addBtn, popUpFormSupplement, sectionCards, editAvatarForm, userAvatar, setting, userName, userJob, nameInput, jobInput} from '../utils/constants.js';
 import Api from '../components/Api';
 
 
@@ -42,41 +42,78 @@ popupWithImage.setEventListeners();
     popupWithImage.open(link, name);
   }
 
-  const handleCardDelete = () => {
+  const handleCardDelete = (card) => {
+    // событие после которого удаляем карточку
+    const submitHandlerWithDeleteFoto = () => {
+
+      api.deleteCard(card.getId())
+      .then(() => card.removeCard())
+      .catch(err => console.log(err));
+
+      popupCardDelete.close();
+    }
+
+    // попап удаления карточки
+    const popupCardDelete = new PopupWithForm(allPopUp.popUpDeleteFoto, submitHandlerWithDeleteFoto);
+    popupCardDelete.setEventListeners();
+
+
     popupCardDelete.open();
-    api.deleteCard(card.getId())
-    .then(() => card.removeCard())
-    .catch(err => Promise.reject(`Ошибка ${err.status}`));
   }
 
 
 
-// создаём карточки
-const generateCard = (item) => {
-  const card = new Card({item},cardSelector, handleCardDelete, cardImageClickHandler);
-  return card.generateCard();
-}
+
+  api.getFullInfo()
+  .then(([cardsData, userData]) => {
+    const userId = userData._id;
 
 
-// отрисовываем все карточки приходящие из массива
-  // const cardList = new Section({
-  //   item: initialCards,
-  //   renderer: (item) => cardList.addItem(generateCard(item))
-  // }, sectionCards);
 
-  // cardList.renderItems();
+    user.setUserInfo(userData);
+
+    // создаём карточку
+    const generateCard = (item) => {
+
+      const handleCardLike = (shouldILike) => { // true
+        if(shouldILike)
+          api.incrementLike(item._id)
+        else
+          api.decrementLike(item._id)
+      }
+
+      const card = new Card({...item, currentUserId: userId}, cardSelector, handleCardDelete, cardImageClickHandler, handleCardLike);
+      return card.generateCard();
+    }
+
+    // отрисовываем все карточки которые приходят
+    const cardList = new Section({
+      item: cardsData,
+      renderer: (item) => cardList.addItem(generateCard(item))
+    }, sectionCards);
+
+    // создаём новую карточку и добавляем её сразу на страницу
+    const submitHandlerWithNewCard = (data) => {
+      api.newCard(data)
+      .then(res => cardList.addItem(generateCard(res)))
+      .catch(err => console.log(err))
+
+      popupAddNewCard.close();
+    }
+
+    // попап добавления карточки
+    const popupAddNewCard = new PopupWithForm(allPopUp.popUpSupplement, submitHandlerWithNewCard);
+    popupAddNewCard.setEventListeners();
+
+    addBtn.addEventListener('click', () => {
+      addCardValidator.disableSubmitButton();
+      popupAddNewCard.open();
+    });
 
 
-  api.getInitialCards()
-.then(res => {
-  const cardList = new Section({
-    item: res,
-    renderer: (item) => cardList.addItem(generateCard(item))
-  }, sectionCards);
-
-  cardList.renderItems();
-})
-.catch(err => Promise.reject(`Ошибка ${err.status}`))
+    cardList.renderItems();
+  })
+  .catch(err => console.log(err))
 
 
 
@@ -88,38 +125,9 @@ const generateCard = (item) => {
     popupEdit.open();
   }
 
-
-
-// создаём новую карточку и добавляем её сразу на страницу
-  const submitHandlerWithNewCard = (data) => {
-    // const cardElement = generateCard({name: data['content-name-foto'], link: data['content-foto'], alt: 'Картинка'});
-    // cardList.addItem(cardElement);
-
-    api.newCard(data)
-    .then(res => generateCard(res))
-    .catch(err => Promise.reject(`Ошибка ${err.status}`))
-
-    popupAddNewCard.close();
-  }
-
-
-
-
   editBtn.addEventListener('click', editPopUp);
 
-  addBtn.addEventListener('click', () => {
-    addCardValidator.disableSubmitButton();
-    popupAddNewCard.open();
-  });
-
   const user = new UserInfo(userName, userJob, userAvatar);
-
-
-  api.getUserData()
-  .then(res => {
-  user.setUserInfo(res);
-  })
-  .catch(err => Promise.reject(`Ошибка ${err.status}`))
 
 
   // получаем данные о пользователе и меняем их на странице
@@ -127,26 +135,25 @@ const generateCard = (item) => {
     api.userEdit(data)
     .then(res => {
       user.setUserInfo(res);
+      console.log(res);
     })
-    .catch(err => Promise.reject(`Ошибка ${err.status}`))
+    .catch(err => console.log(err))
 
     popupEdit.close();
   }
 
-  avatarFoto.addEventListener('click', () => {
+  userAvatar.addEventListener('click', () => {
     popupAvatar.open();
   })
 
-  const submitHandlerWithDeleteFoto = (data) => {
 
-
-  }
 
   const submitHandlerNewAvatar = (data) => {
-    api.upgradeAvatar(data)
-    .then(res => res.ok ? res.json() : Promise.reject(`Ошибка ${res.status}`));
-    // avatarFoto.src = `${data[contentFotoAvatar]}`
 
+    api.upgradeAvatar(data)
+    .catch(err => console.log(err))
+    userAvatar.src = `${data[contentFotoAvatar]}`
+    popupAvatar.close();
   }
 
 
@@ -159,20 +166,17 @@ const generateCard = (item) => {
   const popupEdit = new PopupWithForm(allPopUp.profilePopup, submitHandlerWithEditForm);
   popupEdit.setEventListeners();
 
-  // попап добавления карточки
-  const popupAddNewCard = new PopupWithForm(allPopUp.popUpSupplement, submitHandlerWithNewCard);
-  popupAddNewCard.setEventListeners();
 
-  // попап удаления карточки
-  const popupCardDelete = new PopupWithForm(allPopUp.popUpDeleteFoto, submitHandlerWithDeleteFoto);
-  popupCardDelete.setEventListeners();
+
 
 
 
 
 const addCardValidator = new FormValidator(setting, popUpFormSupplement);
 const editProfileValidator = new FormValidator(setting, editForm);
+const avatarProfileValidator = new FormValidator(setting, editAvatarForm);
 
 
 addCardValidator.enableValidation();
 editProfileValidator.enableValidation();
+avatarProfileValidator.enableValidation();

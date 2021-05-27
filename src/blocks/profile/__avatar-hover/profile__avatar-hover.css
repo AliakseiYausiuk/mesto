@@ -1,19 +1,15 @@
-/* .profile__avatar-hover {
-  width: 120px;
-  height: 120px;
-  background-image: url('../../../images/Vector-avatar-hover.svg');
-  background-repeat: no-repeat;
-  background-position: center;
-  position: absolute;
-  margin: 42px 0 0 0;
+.profile__avatar-hover {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  border-radius: 50%;
 }
 
-.profile__avatar-hover:hover {
-} */
-
-/* .profile__avatar-hover {
-  border-radius: 50%;
-  z-index: 1;
-} */
+.profile__avatar-hover:hover::before  {
+  position: absolute;
+  /* opacity: .8; */
+  content: url('../../../images/Vector-avatar-hover.svg');
+}
 
 

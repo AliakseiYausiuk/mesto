@@ -1,16 +1,18 @@
 
 
 export default class Card {
-  constructor({item}, cardSelector, handleCardDelete, handleCardClick) {
+  constructor(item, cardSelector, handleCardDelete, handleCardClick, handleCardLike) {
     this._name = item.name;
     this._link = item.link;
     this._likes = item.likes;
-    // this._likeFoto = likeFoto;
-    // this._alt = item.alt;
     this._id = item._id;
+    this._ownerId = item.owner._id;
+    this._currentUserId = item.currentUserId;
     this._cardSelector = cardSelector;
     this._handleCardClick = handleCardClick;
     this._handleCardDelete = handleCardDelete;
+    this._handleCardLike = handleCardLike;
+    // this._alt = item.alt;
   }
   // копируем template элемент
   _getTemplate() {
@@ -32,8 +34,23 @@ export default class Card {
     this._imageElement.src = this._link;
     this._imageElement.alt = 'фото карточки'
 
+    // показываем количество лайков
+    this._element.querySelector('.cards__like-number').textContent = this._likes.length;
 
-    this._element.querySelector('.cards__like-number').textContent = this._likes.length
+    // удаляем кнопу удадения картинок если это не картинка полльзователя
+    if (this._currentUserId !== this._ownerId) {
+      this._element.querySelector('.cards__btn-delete').remove();
+    }
+
+    this._isLiked = this._likes.find(user => user._id == this._currentUserId) // null //
+
+    if(this._isLiked) {
+      // закрась сердечко
+      this._element.querySelector('.cards__like').classList.add('cards__like_active');
+    } else {
+
+      this._element.querySelector('.cards__like').classList.remove('cards__like_active');
+    }
 
     return this._element;
   }
@@ -59,10 +76,11 @@ export default class Card {
     });
     this._element.querySelector('.cards__btn-delete').addEventListener('click', () => {
       // this._element.querySelector('.cards__btn-delete').closest('.cards__card').remove();
-      this._handleCardDelete();
+      this._handleCardDelete(this);
     })
     this._element.querySelector('.cards__like').addEventListener('click', () => {
-      this._element.querySelector('.cards__like').classList.toggle('cards__like_active');
+      this._handleCardLike(!this._isLiked)
+      // this._element.querySelector('.cards__like').classList.toggle('cards__like_active');
     })
 
   }

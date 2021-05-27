@@ -7,6 +7,11 @@ export default class Api {
     this._headers = headers;
   }
 
+  getFullInfo() {
+    return Promise.all([this.getInitialCards(), this.getUserData()])
+    .catch(console.log)
+  }
+
   getInitialCards() {
     return fetch(`${this._baseUrl}/cards`,{
       headers: this._headers
@@ -61,6 +66,25 @@ export default class Api {
         avatar: avatar['contentFotoAvatar']
       })
     })
+  }
+
+  incrementLike(id) {
+    return fetch(`${this._baseUrl}/cards/likes/${id}`, {
+      method: 'PUT',
+      headers: this._headers,
+    })
+    .then(res => res.ok ? res.json() : Promise.reject(`Ошибка ${res.status}`))
+    .catch(err => console.log(err))
+  }
+
+
+  decrementLike(id) {
+    return fetch(`${this._baseUrl}/cards/likes/${id}`, {
+      method: 'DELETE ',
+      headers: this._headers,
+    })
+    .then(res => res.ok ? res.json() : Promise.reject(`Ошибка ${res.status}`))
+    .catch(err => console.log(err))
   }
 
 }
