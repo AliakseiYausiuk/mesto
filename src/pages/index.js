@@ -21,8 +21,6 @@ const logo = new URL('../images/logo.svg', import.meta.url);
 const plus = new URL('../images/plus.svg', import.meta.url);
 const vector = new URL('../images/Vector.svg', import.meta.url);
 
-
-
 const api = new Api({
   baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-24',
   headers: {
@@ -33,9 +31,24 @@ const api = new Api({
 
 
 
-
 const popupWithImage = new PopupWithImage(allPopUp.openPopupFoto);
 popupWithImage.setEventListeners();
+
+
+// событие после которого удаляем карточку
+const submitHandlerWithDeleteFoto = () => {
+
+  api.deleteCard(card.getId())
+  .then(() => card.removeCard())
+  .catch(err => console.log(err));
+
+  popupCardDelete.close();
+}
+
+   // попап удаления карточки
+   const popupCardDelete = new PopupWithForm(allPopUp.popUpDeleteFoto, submitHandlerWithDeleteFoto);
+   popupCardDelete.setEventListeners();
+
 
 
   const cardImageClickHandler = (link, name) => {
@@ -43,77 +56,64 @@ popupWithImage.setEventListeners();
   }
 
   const handleCardDelete = (card) => {
-    // событие после которого удаляем карточку
-    const submitHandlerWithDeleteFoto = () => {
-
-      api.deleteCard(card.getId())
-      .then(() => card.removeCard())
-      .catch(err => console.log(err));
-
-      popupCardDelete.close();
-    }
-
-    // попап удаления карточки
-    const popupCardDelete = new PopupWithForm(allPopUp.popUpDeleteFoto, submitHandlerWithDeleteFoto);
-    popupCardDelete.setEventListeners();
-
-
     popupCardDelete.open();
   }
 
 
 
-
-  api.getFullInfo()
-  .then(([cardsData, userData]) => {
-    const userId = userData._id;
-
-
-
-    user.setUserInfo(userData);
-
-    // создаём карточку
-    const generateCard = (item) => {
-
-      const handleCardLike = (shouldILike) => { // true
-        if(shouldILike)
-          api.incrementLike(item._id)
-        else
-          api.decrementLike(item._id)
-      }
-
-      const card = new Card({...item, currentUserId: userId}, cardSelector, handleCardDelete, cardImageClickHandler, handleCardLike);
-      return card.generateCard();
-    }
-
-    // отрисовываем все карточки которые приходят
-    const cardList = new Section({
-      item: cardsData,
-      renderer: (item) => cardList.addItem(generateCard(item))
-    }, sectionCards);
-
-    // создаём новую карточку и добавляем её сразу на страницу
-    const submitHandlerWithNewCard = (data) => {
-      api.newCard(data)
-      .then(res => cardList.addItem(generateCard(res)))
-      .catch(err => console.log(err))
-
-      popupAddNewCard.close();
-    }
-
-    // попап добавления карточки
-    const popupAddNewCard = new PopupWithForm(allPopUp.popUpSupplement, submitHandlerWithNewCard);
-    popupAddNewCard.setEventListeners();
-
-    addBtn.addEventListener('click', () => {
-      addCardValidator.disableSubmitButton();
-      popupAddNewCard.open();
-    });
+// отрисовываем все карточки которые приходят
+const cardList = new Section({
+  renderer: (item) => cardList.addItem(generateCard(item))
+}, sectionCards);
 
 
-    cardList.renderItems();
-  })
+
+api.getFullInfo()
+.then(([cardsData, userData]) => {
+  cardList.renderItems(cardsData);
+
+  user.setUserInfo(userData);
+
+  addBtn.addEventListener('click', () => {
+    addCardValidator.disableSubmitButton();
+    popupAddNewCard.open();
+  });
+
+})
+.catch(err => console.log(err))
+
+
+const user = new UserInfo(userName, userJob, userAvatar);
+
+
+ // создаём карточку
+ const generateCard = (item) => {
+
+   const userId = item.owner._id;
+
+  const handleCardLike = (shouldILike) => { // true
+    if(shouldILike)
+      api.incrementLike(item._id)
+    else
+      api.decrementLike(item._id)
+  }
+
+  const card = new Card({...item, currentUserId: userId}, cardSelector, handleCardDelete, cardImageClickHandler, handleCardLike);
+  return card.generateCard();
+}
+
+// создаём новую карточку и добавляем её сразу на страницу
+const submitHandlerWithNewCard = (data) => {
+  api.newCard(data)
+  .then(res => cardList.addItem(generateCard(res)))
   .catch(err => console.log(err))
+
+  popupAddNewCard.close();
+}
+
+// попап добавления карточки
+const popupAddNewCard = new PopupWithForm(allPopUp.popUpSupplement, submitHandlerWithNewCard);
+popupAddNewCard.setEventListeners();
 
 
 
@@ -127,7 +127,7 @@ popupWithImage.setEventListeners();
 
   editBtn.addEventListener('click', editPopUp);
 
-  const user = new UserInfo(userName, userJob, userAvatar);
+
 
 
   // получаем данные о пользователе и меняем их на странице
@@ -135,7 +135,7 @@ popupWithImage.setEventListeners();
     api.userEdit(data)
     .then(res => {
       user.setUserInfo(res);
-      console.log(res);
+
     })
     .catch(err => console.log(err))
 

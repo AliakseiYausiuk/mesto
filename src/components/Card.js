@@ -32,7 +32,7 @@ export default class Card {
     this._imageElement = this._element.querySelector('.cards__foto');
 
     this._imageElement.src = this._link;
-    this._imageElement.alt = 'фото карточки'
+    this._imageElement.alt = this._name
 
     // показываем количество лайков
     this._element.querySelector('.cards__like-number').textContent = this._likes.length;

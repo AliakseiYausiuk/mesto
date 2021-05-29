@@ -12,18 +12,22 @@ export default class Api {
     .catch(console.log)
   }
 
+  _getResponseData(res) {
+    return res.ok ? res.json() : Promise.reject(`Ошибка ${res.status}`)
+  }
+
   getInitialCards() {
     return fetch(`${this._baseUrl}/cards`,{
       headers: this._headers
     })
-    .then(res => res.ok ? res.json() : Promise.reject(`Ошибка ${res.status}`))
+    .then(res => this._getResponseData(res))
   }
 
   getUserData() {
     return fetch(`${this._baseUrl}/users/me`, {
       headers: this._headers
     })
-    .then(res => res.ok ? res.json() : Promise.reject(`Ошибка ${res.status}`))
+    .then(res => this._getResponseData(res))
   }
 
   userEdit(data) {
@@ -35,7 +39,7 @@ export default class Api {
         about: data['content-job']
       })
     })
-    .then(res => res.ok ? res.json() : Promise.reject(`Ошибка ${res.status}`))
+    .then(res => this._getResponseData(res))
   }
 
   newCard(data) {
@@ -47,7 +51,7 @@ export default class Api {
         link: data['content-foto']
       })
     })
-    .then(res => res.ok ? res.json() : Promise.reject(`Ошибка ${res.status}`))
+    .then(res => this._getResponseData(res))
   }
 
   deleteCard(id) {
@@ -55,7 +59,7 @@ export default class Api {
       method: 'DELETE',
       headers: this._headers,
     })
-    .then(res => res.ok ? res.json() : Promise.reject(`Ошибка ${res.status}`))
+    .then(res => this._getResponseData(res))
   }
 
   upgradeAvatar(avatar) {
@@ -73,7 +77,7 @@ export default class Api {
       method: 'PUT',
       headers: this._headers,
     })
-    .then(res => res.ok ? res.json() : Promise.reject(`Ошибка ${res.status}`))
+    .then(res => this._getResponseData(res))
     .catch(err => console.log(err))
   }
 
@@ -83,7 +87,7 @@ export default class Api {
       method: 'DELETE ',
       headers: this._headers,
     })
-    .then(res => res.ok ? res.json() : Promise.reject(`Ошибка ${res.status}`))
+    .then(res => this._getResponseData(res))
     .catch(err => console.log(err))
   }
 
