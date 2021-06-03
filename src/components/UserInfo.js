@@ -1,11 +1,10 @@
 
 
 export default class UserInfo {
-  constructor(userName, userJob, avatar, userId) {
+  constructor(userName, userJob, avatar) {
     this._userName = userName;
     this._userJob = userJob;
     this._avatar = avatar;
-    this._userId = userId;
   }
 
   // выводим объект с информацией пользователя
@@ -22,11 +21,7 @@ export default class UserInfo {
     this._userName.textContent = data.name;
     this._userJob.textContent = data.about;
     this._avatar.src = data.avatar;
+
   }
 
-  getUser() {
-    return {
-      user: this._userId
-    }
-  }
 }

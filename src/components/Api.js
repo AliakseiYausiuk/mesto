@@ -84,7 +84,7 @@ export default class Api {
 
   decrementLike(id) {
     return fetch(`${this._baseUrl}/cards/likes/${id}`, {
-      method: 'DELETE ',
+      method: 'DELETE',
       headers: this._headers,
     })
     .then(res => this._getResponseData(res))

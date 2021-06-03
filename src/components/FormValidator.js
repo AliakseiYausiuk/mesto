@@ -46,21 +46,19 @@ export class FormValidator {
       } else {
         this._buttonElement.classList.remove(this._data.inactiveButtonClass);
         this._buttonElement.removeAttribute('disabled');
-        // console.log(this._data.submitButtonSelector);
-        this._buttonElement.textContent = 'Сохранение...';
       }
   }
 
   _setEventListeners() {
      this._inputLists = Array.from(this._form.querySelectorAll(this._data.inputSelector));
 
-    this._inputLists.forEach(inputElement => {
-      inputElement.addEventListener('input', () => {
-        this._checkInput(inputElement);
+     this._inputLists.forEach(inputElement => {
+       inputElement.addEventListener('input', () => {
+         this._checkInput(inputElement);
 
-        this._toggleButtonState(this._inputLists);
+         this._toggleButtonState(this._inputLists);
+        })
       })
-    })
 
   }
   enableValidation() {

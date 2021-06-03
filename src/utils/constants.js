@@ -18,6 +18,7 @@ export const userAvatar = document.querySelector('.profile__avatar');
 export const popUpDeleteFoto = document.querySelector('#pop-up-delete-foto');
 export const popUpAvatar = document.querySelector('#pop-up-upgred-avatar');
 export const editAvatarForm = document.querySelector('#pop-upUpgredAvatar');
+export const btnPopupSunmit = '.pop-up__btn-save';
 
 export const allPopUp = {
   profilePopup,

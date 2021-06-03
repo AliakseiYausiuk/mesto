@@ -4,6 +4,7 @@ export default class PopupWithForm extends Popup {
   constructor(popupSelector, submitHandler) {
     super(popupSelector)
     this._submitHandler = submitHandler;
+    this._popupBtn = this._popup.querySelector('.pop-up__btn-save').textContent;
   }
 
   _getInputValues() {
@@ -30,5 +31,14 @@ export default class PopupWithForm extends Popup {
     // очищаю форму после закрытия формы
     this._form.reset();
     super.close();
+  }
+
+  // смена текста при отправке данных на сервер, чтобы пользователь видел закгрузку
+  setNewLoadingText() {
+    this._popup.querySelector('.pop-up__btn-save').textContent = 'Сохранение...';
+  }
+  // после загрузки возвращается преждний текст
+  defaultTextBtn() {
+    this._popup.querySelector('.pop-up__btn-save').textContent = this._popupBtn;
   }
 }
