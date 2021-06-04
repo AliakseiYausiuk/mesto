@@ -9,7 +9,6 @@ export default class Api {
 
   getFullInfo() {
     return Promise.all([this.getInitialCards(), this.getUserData()])
-    .catch(console.log)
   }
 
   _getResponseData(res) {
@@ -70,6 +69,7 @@ export default class Api {
         avatar: avatar['contentFotoAvatar']
       })
     })
+    .then(res => this._getResponseData(res))
   }
 
   incrementLike(id) {
@@ -78,7 +78,6 @@ export default class Api {
       headers: this._headers,
     })
     .then(res => this._getResponseData(res))
-    .catch(err => console.log(err))
   }
 
 
@@ -88,7 +87,6 @@ export default class Api {
       headers: this._headers,
     })
     .then(res => this._getResponseData(res))
-    .catch(err => console.log(err))
   }
 
 }

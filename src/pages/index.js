@@ -40,25 +40,8 @@ popupWithImage.setEventListeners();
   popupCardDelete.setEventListeners();
 
 
-// событие после которого удаляем карточку
-// const submitHandlerWithDeleteFoto = (cardId, card) => {
-// // здесь будет изменять кнопка на сохраниие
-// const handleCardDelete = () => {
-//   console.log(card);
-//    popupCardDelete.setNewLoadingText();
-//   api.deleteCard(cardId)
-//   .then(() => {
-//     popupCardDelete.close();
-//     popupCardDelete.defaultTextBtn();
-//   })
-//   .catch(err => console.log(err));
-//  }
-//   popupCardDelete.setNewSubmitHandler(handleCardDelete);
-//   popupCardDelete.open();
-// }
 const submitHandlerWithDeleteFoto = () => {
-  popupCardDelete.open();
-  // popupCardDelete.setNewSubmitHandler(handleCardDelete);
+  popupCardDelete.setNewLoadingText();
 }
 
 
@@ -66,31 +49,23 @@ const submitHandlerWithDeleteFoto = () => {
     popupWithImage.open(link, name);
   }
 
-  // const handleCardDelete = (card) => {
-  //   popupCardDelete.open();
-  // }
 
    // создаём карточку
  const generateCard = (item) => {
 
-//  const handleCardLike = (shouldILike) => { // true
-//    if(shouldILike)
-//      api.incrementLike(item._id)
-//    else
-//      api.decrementLike(item._id)
-//  }
-
  const card = new Card(item, userId,{
    handleCardDelete : () => {
-    submitHandlerWithDeleteFoto();
-    popupCardDelete.setNewLoadingText();
-    api.deleteCard(card.getId())
-    .then(() => {
+     popupCardDelete.open();
+     popupCardDelete.setNewSubmitHandler(() => {
+      submitHandlerWithDeleteFoto();
+      api.deleteCard(card.getId())
+      .then(() => {
       card.removeCard();
       popupCardDelete.close();
-      popupCardDelete.defaultTextBtn();
     })
-    .catch(err => console.log(err));
+    .catch(err => console.log(err))
+    .finally(() => popupCardDelete.defaultTextBtn())
+    });
    }},
    cardSelector,
    cardImageClickHandler,
@@ -98,13 +73,14 @@ const submitHandlerWithDeleteFoto = () => {
     if(shouldILike)
       api.incrementLike(item._id)
       .then(res => {
-        card.like()
+        card.likeNumber(res);
+        card.like();
       })
       .catch(err => console.log(err))
     else
       api.decrementLike(item._id)
       .then(res => {
-        // console.log(res);
+        card.likeNumber(res);
         card.like();
       })
       .catch(err => console.log(err))
@@ -127,14 +103,13 @@ api.getFullInfo()
   cardList.renderItems(cardsData);
 
   user.setUserInfo(userData);
-
-  addBtn.addEventListener('click', () => {
-    addCardValidator.disableSubmitButton();
-    popupAddNewCard.open();
-  });
-
 })
 .catch(err => console.log(err))
+
+addBtn.addEventListener('click', () => {
+  addCardValidator.disableSubmitButton();
+  popupAddNewCard.open();
+});
 
 
 const user = new UserInfo(userName, userJob, userAvatar);
@@ -148,9 +123,9 @@ const submitHandlerWithNewCard = (data) => {
   .then(res => {
     cardList.addItem(generateCard(res))
     popupAddNewCard.close();
-    popupAddNewCard.defaultTextBtn();
   })
   .catch(err => console.log(err))
+  .finally(() => popupAddNewCard.defaultTextBtn())
 }
 
 // попап добавления карточки
@@ -177,9 +152,9 @@ popupAddNewCard.setEventListeners();
     api.userEdit(data)
     .then(res => {
       user.setUserInfo(res);
-      popupEdit.defaultTextBtn();
     })
     .catch(err => console.log(err))
+    .finally(() => popupEdit.defaultTextBtn())
 
     popupEdit.close();
   }
@@ -196,12 +171,13 @@ popupAddNewCard.setEventListeners();
     popupAvatar.setNewLoadingText();
     api.upgradeAvatar(data)
     .then(res => {
-      userAvatar.src = `${data['contentFotoAvatar']}`;
+      user.setUserInfo({
+        avatar: data.contentFotoAvatar
+      })
       popupAvatar.close();
-      popupAvatar.defaultTextBtn();
-      // editAvatarForm.querySelector('.pop-up__btn-save').textContent = btnText;
     })
     .catch(err => console.log(err))
+    .finally(() => popupAvatar.defaultTextBtn())
   }
 
 
