@@ -152,11 +152,11 @@ popupAddNewCard.setEventListeners();
     api.userEdit(data)
     .then(res => {
       user.setUserInfo(res);
+      popupEdit.close();
     })
     .catch(err => console.log(err))
     .finally(() => popupEdit.defaultTextBtn())
 
-    popupEdit.close();
   }
 
   userAvatar.addEventListener('click', () => {
